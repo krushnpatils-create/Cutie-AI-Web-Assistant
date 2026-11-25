@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cutie Smart AI — Personal Futuristic Assistant</title>
+<title>Cutie ZARA AI — Personal Futuristic Assistant</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +50,7 @@ tailwind.config = {
     </div>
     <div>
       <div class="flex items-center gap-2">
-        <h1 class="font-display font-bold text-base sm:text-lg tracking-wider bg-gradient-to-r from-cyan-300 via-white to-pink-400 bg-clip-text text-transparent">CUTIE Smart AI</h1>
+        <h1 class="font-display font-bold text-base sm:text-lg tracking-wider bg-gradient-to-r from-cyan-300 via-white to-pink-400 bg-clip-text text-transparent">CUTIE ZARA AI</h1>
         <span id="engine-badge" class="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">FREE AI</span>
       </div>
       <p class="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
@@ -97,13 +97,12 @@ tailwind.config = {
 
       <div class="w-full z-10 flex flex-col items-center text-center gap-2">
         <div class="w-full px-4 py-2.5 rounded-2xl bg-slate-950/75 border border-slate-800/90 text-xs sm:text-sm font-mono text-cyan-200 min-h-[42px] flex items-center justify-center">
-          <span id="live-transcript-text" class="truncate">Orb दाबा किंवा खाली काहीही टाइप करा...</span>
+          <span id="live-transcript-text" class="truncate">Tap the orb or type below • Orb दाबा किंवा खाली टाइप करा</span>
         </div>
         <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer select-none">
           <input id="wake-switch" type="checkbox" class="accent-cyan-400 w-4 h-4">
-          Auto Wake — "हे झारा" / "Hey Zara" म्हणून हाक मारा
+          Auto Wake — "हे झारा" / "Hey Zara"
         </label>
-        <p class="text-[11px] text-slate-400">उदा: <span class="text-cyan-300">"AI म्हणजे काय?"</span>, <span class="text-pink-300">"पाच मिनिटांनी चहा आठव"</span>, <span class="text-violet-300">"Pune cha havaman"</span></p>
       </div>
     </div>
 
@@ -126,15 +125,11 @@ tailwind.config = {
 
     <div id="chat-messages" class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 scroll-smooth"></div>
 
-    <div class="px-4 py-2.5 bg-slate-950/50 border-t border-slate-800/70">
-      <div class="flex items-center gap-2 overflow-x-auto pb-1" id="chips"></div>
-    </div>
-
     <form id="chat-form" class="p-3 sm:p-4 bg-slate-900/90 border-t border-slate-800 flex items-center gap-2.5">
       <button type="button" id="mic-input-btn" title="Voice Input" class="p-3 rounded-2xl bg-slate-800 hover:bg-pink-500/20 border border-slate-700 hover:border-pink-500/50 text-cyan-400 hover:text-pink-400 transition shrink-0 active:scale-95"><i data-lucide="mic" class="w-5 h-5"></i></button>
-      <input type="text" id="user-input" autocomplete="off" placeholder="काहीही विचारा... (AI म्हणजे काय?, HTML कोड बनव, Open YouTube)" class="flex-1 bg-slate-950/90 border border-slate-700/90 focus:border-cyan-400 rounded-2xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition">
+      <input type="text" id="user-input" autocomplete="off" placeholder="Ask anything • काहीही विचारा..." class="flex-1 bg-slate-950/90 border border-slate-700/90 focus:border-cyan-400 rounded-2xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition">
       <button type="submit" id="send-btn" class="p-3 px-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-pink-500 hover:from-cyan-400 hover:to-pink-400 text-slate-950 font-semibold shadow-lg shadow-cyan-500/20 transition shrink-0 flex items-center gap-1.5 active:scale-95 disabled:opacity-50">
-        <span class="hidden sm:inline text-sm">पाठव</span><i data-lucide="send" class="w-4 h-4"></i>
+        <span class="hidden sm:inline text-sm">Send</span><i data-lucide="send" class="w-4 h-4"></i>
       </button>
     </form>
   </section>
@@ -153,27 +148,27 @@ tailwind.config = {
       <button id="close-settings-btn" class="p-1.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
     </div>
     <div class="mt-4 space-y-4 text-sm">
-      <label class="block"><span class="text-xs text-slate-400">तुझे नाव</span>
+      <label class="block"><span class="text-xs text-slate-400">Your name • तुमचे नाव (optional)</span>
         <input id="set-name" class="mt-1 w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 focus:outline-none focus:border-cyan-400"></label>
-      <label class="block"><span class="text-xs text-slate-400">Gemini API Key (ऐच्छिक — नसेल तर Free AI वापरला जाईल)</span>
+      <label class="block"><span class="text-xs text-slate-400">Gemini API Key (optional • ऐच्छिक — नसेल तर Free AI)</span>
         <input id="set-key" type="password" placeholder="AIza..." class="mt-1 w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 font-mono text-xs focus:outline-none focus:border-cyan-400">
-        <span class="text-[11px] text-slate-500">Key फक्त या ब्राउझरच्या localStorage मध्ये राहते. ही फाइल दुसऱ्यांना देऊ नका.</span></label>
-      <label class="block"><span class="text-xs text-slate-400">Gemini मॉडेल्स (स्वल्पविरामाने; पहिले चालले नाही तर पुढचे)</span>
+        <span class="text-[11px] text-slate-500">Key stays only in this browser's localStorage. Don't share this file with your key inside.</span></label>
+      <label class="block"><span class="text-xs text-slate-400">Gemini models (comma separated; next one is tried if the first fails)</span>
         <input id="set-models" class="mt-1 w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 font-mono text-xs focus:outline-none focus:border-cyan-400"></label>
       <div class="grid grid-cols-2 gap-3">
-        <label class="block"><span class="text-xs text-slate-400">ऐकण्याची भाषा</span>
+        <label class="block"><span class="text-xs text-slate-400">Listening language • ऐकण्याची भाषा</span>
           <select id="set-reclang" class="mt-1 w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2">
             <option value="mr-IN">मराठी (mr-IN)</option><option value="en-IN">English (en-IN)</option><option value="hi-IN">हिंदी (hi-IN)</option>
           </select></label>
-        <label class="block"><span class="text-xs text-slate-400">आवाज</span>
+        <label class="block"><span class="text-xs text-slate-400">Voice • आवाज</span>
           <select id="set-gender" class="mt-1 w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2">
-            <option value="female">स्त्री</option><option value="male">पुरुष</option>
+            <option value="female">Female • स्त्री</option><option value="male">Male • पुरुष</option>
           </select></label>
       </div>
-      <label class="block"><span class="text-xs text-slate-400">बोलण्याचा वेग: <b id="rate-val" class="text-cyan-300"></b></span>
+      <label class="block"><span class="text-xs text-slate-400">Speech speed • वेग: <b id="rate-val" class="text-cyan-300"></b></span>
         <input id="set-rate" type="range" min="0.7" max="1.5" step="0.05" class="w-full accent-cyan-400"></label>
       <button id="save-settings-btn" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-pink-500 text-slate-950 font-semibold">Save</button>
-      <button id="forget-btn" class="w-full py-2 rounded-xl border border-rose-500/40 text-rose-300 hover:bg-rose-500/10 text-xs">संवादाची आठवण (history) पुसून टाक</button>
+      <button id="forget-btn" class="w-full py-2 rounded-xl border border-rose-500/40 text-rose-300 hover:bg-rose-500/10 text-xs">Clear conversation memory • आठवण पुसा</button>
     </div>
   </div>
 </div>
@@ -186,14 +181,14 @@ tailwind.config = {
       <button id="close-help-btn" class="p-1.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
     </div>
     <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs max-h-[65vh] overflow-y-auto pr-1">
-      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-cyan-400 font-semibold block mb-1">🧠 कोणताही प्रश्न</span>"क्वांटम फिजिक्स समजाव"<br>"Explain photosynthesis"<br>"Marathi madhe joke sang"</div>
-      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-pink-400 font-semibold block mb-1">💻 कोड / वेबसाइट</span>"एक portfolio HTML पेज बनव"<br>"Python calculator script दे"<br>(Copy / Download / Preview बटणे येतात)</div>
-      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-amber-400 font-semibold block mb-1">⏰ रिमाइंडर / टायमर</span>"पाच मिनिटांनी चहा आठव"<br>"सकाळी 7:30 वाजता उठव"<br>"stopwatch", "reminders"</div>
-      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-emerald-400 font-semibold block mb-1">📝 नोट्स / टास्क</span>"नोट कर: दूध आणायचे"<br>"नोट्स"<br>"टास्क जोड: वीज बिल"<br>"टास्क 1 पूर्ण"</div>
-      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-cyan-400 font-semibold block mb-1">🌐 उघड</span>"Open Claude AI", "YouTube उघड"<br>"गाणे लाव: ..." , "नकाशा Pune"<br>"बातम्या", "wikipedia Shivaji"</div>
-      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-violet-400 font-semibold block mb-1">🔧 इतर</span>"वेळ", "तारीख", "हवामान Pune"<br>"45 * 18", "20% of 500"<br>"विनोद", "नाणे टाक", "बॅटरी"<br>"clipboard चा सारांश"</div>
+      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-cyan-400 font-semibold block mb-1">🧠 Ask anything • काहीही विचारा</span>"What is AI?" • "क्वांटम फिजिक्स समजाव"<br>Answer comes in the language you ask in.</div>
+      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-pink-400 font-semibold block mb-1">💻 Code / Website</span>"Make a portfolio HTML page"<br>"एक HTML पेज बनव"<br>(Copy / Download / Preview)</div>
+      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-amber-400 font-semibold block mb-1">⏰ Reminder / Timer</span>"Remind me in 5 minutes to drink tea"<br>"पाच मिनिटांनी चहा आठव"<br>"wake me at 7:30 am", "stopwatch"</div>
+      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-emerald-400 font-semibold block mb-1">📝 Notes / Tasks</span>"note: buy milk" • "नोट कर: दूध आणायचे"<br>"add task: pay bill" • "टास्क जोड: वीज बिल"<br>"my notes", "my tasks", "task 1 done"</div>
+      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-cyan-400 font-semibold block mb-1">🌐 Open (only when you say so)</span>"Open YouTube" • "Open Claude AI"<br>"play song Tum Hi Ho"<br>"navigate to Pune" • "wikipedia Shivaji"<br>"google python tutorial"</div>
+      <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800"><span class="text-violet-400 font-semibold block mb-1">🔧 Misc</span>"what time is it", "वेळ", "date"<br>"weather in Pune" • "45 * 18" • "20% of 500"<br>"tell me a joke", "flip a coin", "battery"<br>"summarize my clipboard"</div>
     </div>
-    <p class="mt-3 text-[11px] text-slate-500">ब्राउझरमध्ये शक्य नाही: लॅपटॉप shutdown/restart, ब्राइटनेस, व्हॉल्यूम, Notepad/Word सारखे अॅप्स उघडणे — ते Python ZARA मध्येच चालते.</p>
+    <p class="mt-3 text-[11px] text-slate-500">Not possible in a browser: laptop shutdown/restart, brightness, volume, opening Notepad/Word etc. Those work only in the Python ZARA app.</p>
   </div>
 </div>
 
@@ -211,8 +206,13 @@ const store = {
 };
 function escapeHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
+/* ---- Language: Marathi (Devanagari) or English, chosen per message ---- */
+let LANG = 'mr';
+const detectLang = t => (/[\u0900-\u097F]/.test(t) || /\bmarathi\b|\bmadhe\b/i.test(t)) ? 'mr' : 'en';
+const L = (mr, en) => LANG === 'en' ? en : mr;
+
 const settings = Object.assign({
-  name: 'Krishna Patil', apiKey: '',
+  name: '', apiKey: '',
   models: 'gemini-3.5-flash-lite, gemini-3.8-flash, gemini-3.6-flash, gemini-2.5-flash',
   recLang: 'mr-IN', gender: 'female', rate: 1.0, tts: true, sfx: true
 }, store.get('zara_settings', {}));
@@ -221,7 +221,6 @@ const saveSettings = () => store.set('zara_settings', settings);
 const state = { listening: false, speaking: false, orb: 'idle', energy: 0 };
 let busy = false, wakeMode = false;
 
-/* hasAny: English = whole word, Marathi = word-prefix match */
 function hasAny(text, kws) {
   for (let k of kws) {
     k = k.toLowerCase();
@@ -302,7 +301,7 @@ chatMessages.addEventListener('click', async e => {
   const btn = e.target.closest('.code-btn'); if (!btn) return;
   const item = codeStore[btn.dataset.id]; if (!item) return;
   if (btn.dataset.act === 'copy') {
-    try { await navigator.clipboard.writeText(item.code); showToast('कोड कॉपी झाला'); } catch { showToast('कॉपी करता आले नाही'); }
+    try { await navigator.clipboard.writeText(item.code); showToast('Copied • कॉपी झाला'); } catch { showToast('Copy failed'); }
   } else if (btn.dataset.act === 'download') {
     const extMap = { html: 'html', js: 'js', javascript: 'js', python: 'py', py: 'py', css: 'css', json: 'json', csv: 'csv', md: 'md', markdown: 'md' };
     const ext = item.isHtml ? 'html' : (extMap[item.lang] || 'txt');
@@ -366,30 +365,31 @@ function animateOrb() {
 function setOrb(s) {
   state.orb = s;
   const btn = $('orb-trigger-btn'); btn.classList.remove('orb-glow-idle', 'orb-glow-listening', 'orb-glow-speaking');
-  const L = $('core-mode-label'), H = $('header-status-text'), D = $('status-dot'), M = $('mic-input-btn');
+  const Lb = $('core-mode-label'), H = $('header-status-text'), D = $('status-dot'), M = $('mic-input-btn');
   const micOn = ['bg-pink-500/20', 'border-pink-500', 'text-pink-400', 'animate-pulse'];
   M.classList.remove(...micOn);
   const idleTxt = 'ONLINE' + (settings.name ? ' • ' + settings.name : '');
-  if (s === 'listening') { btn.classList.add('orb-glow-listening'); L.textContent = 'LISTENING...'; L.className = 'text-pink-400 font-bold'; H.textContent = 'MICROPHONE ACTIVE'; D.className = 'w-1.5 h-1.5 rounded-full bg-pink-500 animate-ping'; M.classList.add(...micOn); }
-  else if (s === 'speaking') { btn.classList.add('orb-glow-speaking'); L.textContent = 'SPEAKING'; L.className = 'text-violet-400 font-bold'; H.textContent = 'SYNTHESIZING VOICE...'; D.className = 'w-1.5 h-1.5 rounded-full bg-violet-400 animate-ping'; }
-  else if (s === 'thinking') { btn.classList.add('orb-glow-idle'); L.textContent = 'THINKING...'; L.className = 'text-amber-400 font-bold'; H.textContent = 'AI GENERATING ANSWER...'; D.className = 'w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping'; }
-  else { btn.classList.add('orb-glow-idle'); L.textContent = wakeMode ? 'WAKE-WORD' : 'STANDBY'; L.className = 'text-slate-200 font-bold'; H.textContent = idleTxt; D.className = 'w-1.5 h-1.5 rounded-full bg-cyan-400'; }
+  if (s === 'listening') { btn.classList.add('orb-glow-listening'); Lb.textContent = 'LISTENING...'; Lb.className = 'text-pink-400 font-bold'; H.textContent = 'MICROPHONE ACTIVE'; D.className = 'w-1.5 h-1.5 rounded-full bg-pink-500 animate-ping'; M.classList.add(...micOn); }
+  else if (s === 'speaking') { btn.classList.add('orb-glow-speaking'); Lb.textContent = 'SPEAKING'; Lb.className = 'text-violet-400 font-bold'; H.textContent = 'SYNTHESIZING VOICE...'; D.className = 'w-1.5 h-1.5 rounded-full bg-violet-400 animate-ping'; }
+  else if (s === 'thinking') { btn.classList.add('orb-glow-idle'); Lb.textContent = 'THINKING...'; Lb.className = 'text-amber-400 font-bold'; H.textContent = 'AI GENERATING ANSWER...'; D.className = 'w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping'; }
+  else { btn.classList.add('orb-glow-idle'); Lb.textContent = wakeMode ? 'WAKE-WORD' : 'STANDBY'; Lb.className = 'text-slate-200 font-bold'; H.textContent = idleTxt; D.className = 'w-1.5 h-1.5 rounded-full bg-cyan-400'; }
 }
 const liveText = t => $('live-transcript-text').textContent = t;
+const IDLE_HINT = 'Tap the orb or type below • Orb दाबा किंवा खाली टाइप करा';
 
 /* ============================ Text-to-Speech ============================ */
 function ttsPrepare(text) {
-  text = text.replace(/```[\s\S]*?(?:```|$)/g, ' कोड चॅटमध्ये दिला आहे. ').replace(/https?:\/\/\S+/g, ' ').replace(/[*_`#]+/g, '').replace(/\s+/g, ' ').trim();
+  const mr = /[\u0900-\u097F]/.test(text);
+  text = text.replace(/```[\s\S]*?(?:```|$)/g, mr ? ' कोड चॅटमध्ये दिला आहे. ' : ' The code is in the chat. ').replace(/https?:\/\/\S+/g, ' ').replace(/[*_`#]+/g, '').replace(/\s+/g, ' ').trim();
   if (text.length > 450) {
     const cut = text.slice(0, 450), end = Math.max(...['.', '?', '!', '।'].map(c => cut.lastIndexOf(c)));
-    text = (end > 150 ? cut.slice(0, end + 1) : cut.replace(/\s+\S*$/, '')) + ' बाकी उत्तर चॅटमध्ये वाचा.';
+    text = (end > 150 ? cut.slice(0, end + 1) : cut.replace(/\s+\S*$/, '')) + (mr ? ' बाकी उत्तर चॅटमध्ये वाचा.' : ' Read the rest in the chat.');
   }
   return text;
 }
 function pickVoice(lang) {
   const voices = speechSynthesis.getVoices();
   const norm = v => v.lang.replace('_', '-').toLowerCase();
-  const tryLang = l => voices.filter(v => norm(v) === l.toLowerCase() || norm(v).startsWith(l.slice(0, 2).toLowerCase() + '-') && l.length === 2);
   let pool = voices.filter(v => norm(v) === lang.toLowerCase());
   if (!pool.length && lang.startsWith('mr')) pool = voices.filter(v => norm(v) === 'hi-in');
   if (!pool.length) pool = voices.filter(v => norm(v).startsWith(lang.slice(0, 2).toLowerCase()));
@@ -432,10 +432,10 @@ function stripWake(text) {
   return { has: true, rest };
 }
 function startRec(mode) {
-  if (!SR) { showToast('या ब्राउझरमध्ये Voice Input चालत नाही. Chrome किंवा Edge वापरा.'); return; }
+  if (!SR) { showToast('Voice input needs Chrome or Edge • Chrome/Edge वापरा'); return; }
   stopRec(); recMode = mode;
   rec = new SR(); rec.lang = settings.recLang; rec.interimResults = true; rec.continuous = (mode === 'wake');
-  rec.onstart = () => { recActive = true; if (mode === 'once') { stopSpeaking(); beep('start'); } setOrb('listening'); liveText(mode === 'wake' ? '"हे झारा" म्हणा...' : 'ऐकत आहे... बोला'); };
+  rec.onstart = () => { recActive = true; if (mode === 'once') { stopSpeaking(); beep('start'); } setOrb('listening'); liveText(mode === 'wake' ? 'Say "Hey Zara" • "हे झारा" म्हणा...' : 'Listening... • ऐकत आहे...'); };
   rec.onresult = e => {
     let interim = '', fin = '';
     for (let i = e.resultIndex; i < e.results.length; i++) { const t = e.results[i][0].transcript; (e.results[i].isFinal ? (fin += t) : (interim += t)); }
@@ -443,13 +443,12 @@ function startRec(mode) {
     if (fin.trim()) onSpoken(fin.trim());
   };
   rec.onerror = e => {
-    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { showToast('माइक परवानगी नाकारली गेली. ब्राउझरमध्ये Allow करा.'); wakeMode = false; $('wake-switch').checked = false; }
-    else if (e.error !== 'no-speech' && e.error !== 'aborted') showToast('माइक एरर: ' + e.error);
+    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { showToast('Microphone permission denied • माइक परवानगी द्या'); wakeMode = false; $('wake-switch').checked = false; }
+    else if (e.error !== 'no-speech' && e.error !== 'aborted') showToast('Mic error: ' + e.error);
   };
   rec.onend = () => {
     recActive = false; beep('stop');
-    if (!state.speaking) setOrb(busy ? 'thinking' : 'idle');
-    if (!state.speaking) liveText('Orb दाबा किंवा खाली काहीही टाइप करा...');
+    if (!state.speaking) { setOrb(busy ? 'thinking' : 'idle'); liveText(IDLE_HINT); }
     if (wakeMode && !state.speaking && !busy) setTimeout(() => { if (wakeMode && !recActive && !state.speaking && !busy) startRec('wake'); }, 300);
   };
   try { rec.start(); } catch {}
@@ -459,16 +458,16 @@ function onSpoken(text) {
   const { has, rest } = stripWake(text);
   if (recMode === 'wake') {
     if (has && rest) handleUserCommand(rest);
-    else if (has) { awaitingCmd = Date.now() + 9000; appendMessage('ai', 'हो, बोला?'); speak('हो, बोला?'); }
+    else if (has) { awaitingCmd = Date.now() + 9000; const m = detectLang(text) === 'mr' ? 'हो, बोला?' : 'Yes, go ahead?'; appendMessage('ai', m); speak(m); }
     else if (Date.now() < awaitingCmd) { awaitingCmd = 0; handleUserCommand(text); }
   } else handleUserCommand(has && rest ? rest : text);
 }
 function toggleOnceListening() {
-  if (recActive && recMode === 'once') { stopRec(); setOrb('idle'); liveText('Orb दाबा किंवा खाली काहीही टाइप करा...'); return; }
+  if (recActive && recMode === 'once') { stopRec(); setOrb('idle'); liveText(IDLE_HINT); return; }
   startRec('once');
 }
 
-/* ============================ Memory (history / notes / todos) ============================ */
+/* ============================ Memory ============================ */
 const MAX_HISTORY = 16;
 let history = store.get('zara_history', []).filter(h => h && (h.role === 'user' || h.role === 'model') && typeof h.text === 'string');
 function remember(u, r) { history.push({ role: 'user', text: u }, { role: 'model', text: r }); history = history.slice(-MAX_HISTORY); while (history.length && history[0].role !== 'user') history.shift(); store.set('zara_history', history); }
@@ -480,20 +479,20 @@ function systemPrompt() {
   const now = new Date().toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' });
   return 'तुझे नाव ZARA (Cutie Smart AI) आहे.' + (settings.name ? ` वापरकर्त्याचे नाव ${settings.name} आहे.` : '') +
     ` आत्ताची तारीख आणि वेळ: ${now}. ` +
-    'वापरकर्ता ज्या भाषेत लिहितो (मराठी, इंग्रजी अक्षरांत लिहिलेली मराठी/हिंग्लिश, हिंदी किंवा English) त्याच भाषेत आणि शैलीत उत्तर दे. ' +
+    `वापरकर्त्याचा हा प्रश्न ${LANG === 'en' ? 'English' : 'मराठी'} मध्ये आहे. ` +
+    'वापरकर्ता ज्या भाषेत लिहितो (मराठी देवनागरी, English, हिंदी, किंवा इंग्रजी अक्षरांत लिहिलेली मराठी) नेमक्या त्याच भाषेत आणि शैलीत उत्तर दे; English प्रश्नाला English मध्ये, मराठी प्रश्नाला मराठीत. ' +
     'उत्तर स्पष्ट, अचूक आणि थोडक्यात (साधारण 2-5 वाक्ये) ठेव; वापरकर्त्याने सविस्तर मागितले तर सविस्तर दे. ' +
     'कोड किंवा HTML मागितला तर पूर्ण, थेट चालणारा कोड एकाच ``` fence मध्ये दे (HTML असल्यास CSS आणि JS inline, एकाच फाइलमध्ये) आणि बाहेर फक्त एक छोटे वाक्य लिही. ' +
     'वेबसाइट, पेज किंवा अॅप बनवायला सांगितले आणि तपशील दिला नसेल, तर प्रश्न न विचारता एक सुंदर, पूर्ण उदाहरण बनवून दे. ' +
     'तू ब्राउझरमधील चॅट असिस्टंट आहेस; लॅपटॉपवर किंवा फाइल्सवर प्रत्यक्ष कृती केल्याचे खोटे सांगू नकोस.';
 }
 const fetchT = (url, opts = {}, ms = 30000) => fetch(url, { ...opts, signal: AbortSignal.timeout(ms) });
-const authErr = e => /\b(400|401|403)\b/.test(e.message) && /key|api|permission/i.test(e.message);
 
 async function callGemini(question, maxTok) {
   const models = settings.models.split(',').map(s => s.trim()).filter(Boolean);
   const contents = [...history.map(h => ({ role: h.role, parts: [{ text: h.text }] })), { role: 'user', parts: [{ text: question }] }];
   const body = JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt() }] }, contents, generationConfig: { maxOutputTokens: maxTok } });
-  let lastErr = new Error('Gemini कडून उत्तर मिळाले नाही');
+  let lastErr = new Error('No answer from Gemini');
   for (const model of models) {
     for (let attempt = 0; attempt < 2; attempt++) {
       let res;
@@ -505,12 +504,11 @@ async function callGemini(question, maxTok) {
         const d = await res.json();
         const t = (d.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('').trim();
         if (t) return t;
-        lastErr = new Error('रिकामे उत्तर'); break;
+        lastErr = new Error('empty answer'); break;
       }
-      const msg = `Gemini ${res.status}: ` + (await res.text().catch(() => '')).slice(0, 200);
-      lastErr = new Error(msg);
+      lastErr = new Error(`Gemini ${res.status}: ` + (await res.text().catch(() => '')).slice(0, 200));
       if (res.status === 503 || res.status === 429) { await new Promise(r => setTimeout(r, 600 * (attempt + 1))); continue; }
-      if (res.status === 404) break;          // मॉडेल नाही -> पुढचे
+      if (res.status === 404) break;
       if (res.status === 400 || res.status === 401 || res.status === 403) { lastErr.auth = true; throw lastErr; }
       break;
     }
@@ -543,7 +541,7 @@ async function callFreeAIOnce(question, maxTok, model) {
 async function wikiAnswer(question) {
   const isLookup = /^\s*(what is|what are|who is|who was|define|tell me about)\b|म्हणजे काय|कोण आहे|कोण होते|काय आहे/i.test(question);
   if (!isLookup) return null;
-  const term = question.replace(/^(what is|what are|who is|define|explain|म्हणजे काय|काय आहे)\s*/i, '').replace(/(म्हणजे काय|काय आहे|कोण आहे|बद्दल सांग)[?.!]*$/i, '').replace(/[?.,!]/g, '').trim() || question;
+  const term = question.replace(/^(what is|what are|who is|who was|define|tell me about|explain)\s*/i, '').replace(/(म्हणजे काय|काय आहे|कोण आहे|बद्दल सांग)[?.!]*$/i, '').replace(/[?.,!]/g, '').trim() || question;
   const host = /[\u0900-\u097F]/.test(term) ? 'mr' : 'en';
   try {
     const r = await fetchT(`https://${host}.wikipedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=${encodeURIComponent(term)}&gsrlimit=1&prop=extracts&exintro=1&explaintext=1&exsentences=3`, {}, 15000);
@@ -551,7 +549,7 @@ async function wikiAnswer(question) {
     if (pages) {
       const p = Object.values(pages)[0], ex = (p?.extract || '').trim();
       if (ex && !/may (also )?refer to|:\s*$/i.test(ex) && ex.length > 40)
-        return `**${p.title}** (Wikipedia वरून — AI सेवा सध्या चालत नाही):\n${ex}`;
+        return `**${p.title}** (${L('Wikipedia वरून — AI सेवा सध्या चालत नाही', 'from Wikipedia — AI service is down right now')}):\n${ex}`;
     }
   } catch {}
   return null;
@@ -561,43 +559,59 @@ async function askAI(question) {
   const maxTok = wantsCode ? 8192 : 1024;
   if (settings.apiKey) {
     try { const t = await callGemini(question, maxTok); remember(question, t); return t; }
-    catch (e) { if (e.auth) throw e; console.warn('Gemini अयशस्वी, Free AI वापरत आहे:', e); }
+    catch (e) { if (e.auth) throw e; console.warn('Gemini failed, using Free AI:', e); }
   }
   let t = await callFreeAI(question, maxTok);
   if (t) { remember(question, t); return t; }
   if (!wantsCode) { const w = await wikiAnswer(question); if (w) return w; }
-  const e = new Error('freeai: Free AI सेवा उत्तर देत नाही');
-  e.freeai = true; throw e;
+  const e = new Error('freeai'); e.freeai = true; throw e;
 }
 function friendlyError(e) {
   const m = String(e && e.message || e), low = m.toLowerCase();
   console.error(e);
-  if (e.auth || /api key|permission_denied|unauthenticated/.test(low)) return 'Gemini API key चुकीची किंवा बंद दिसते. Settings (⚙) मध्ये तपासा किंवा key रिकामी ठेवून Free AI वापरा.';
-  if (e.freeai) return 'Free AI सेवा सध्या उत्तर देत नाही (ती मोफत असल्याने वारंवार बंद पडते). कायमचा उपाय: aistudio.google.com वरून मोफत Gemini API key घ्या आणि Settings (⚙) मध्ये टाका, मग प्रत्येक प्रश्नाचे आणि कोडचे उत्तर नीट येईल.';
-  if (/429|quota|resource_exhausted/.test(low)) return 'API ची मर्यादा संपली आहे, थोड्या वेळाने प्रयत्न करा.';
-  if (/503|unavailable/.test(low)) return 'सर्व्हरवर जास्त लोड आहे, थोड्या वेळाने पुन्हा प्रयत्न करा.';
-  if (/network|failed to fetch|timeout|abort/.test(low)) return 'इंटरनेट/सर्व्हर कनेक्शनची अडचण दिसते. कनेक्शन तपासा; Settings मध्ये Gemini key टाकल्यास जास्त विश्वासार्ह चालेल.';
-  return 'काहीतरी अडचण आली: ' + m.slice(0, 150);
+  if (e.freeai) return L('Free AI सेवा सध्या उत्तर देत नाही (ती मोफत असल्याने वारंवार बंद पडते). कायमचा उपाय: aistudio.google.com वरून मोफत Gemini API key घ्या आणि Settings (⚙) मध्ये टाका.',
+    'The free AI service is not responding right now (free services often go down). Permanent fix: get a free Gemini API key from aistudio.google.com and paste it in Settings (⚙).');
+  if (e.auth || /api key|permission_denied|unauthenticated/.test(low)) return L('Gemini API key चुकीची किंवा बंद दिसते. Settings (⚙) मध्ये तपासा किंवा key रिकामी ठेवा.', 'The Gemini API key looks invalid or disabled. Check it in Settings (⚙) or leave it empty to use the free AI.');
+  if (/429|quota|resource_exhausted/.test(low)) return L('API ची मर्यादा संपली आहे, थोड्या वेळाने प्रयत्न करा.', 'API limit reached, try again in a bit.');
+  if (/503|unavailable/.test(low)) return L('सर्व्हरवर जास्त लोड आहे, थोड्या वेळाने प्रयत्न करा.', 'The server is busy, try again shortly.');
+  if (/network|failed to fetch|timeout|abort/.test(low)) return L('इंटरनेट कनेक्शनची अडचण दिसते, तपासा.', 'Looks like a network problem, please check your connection.');
+  return L('काहीतरी अडचण आली: ', 'Something went wrong: ') + m.slice(0, 150);
 }
 
-/* ============================ Fast commands (AI शिवाय) ============================ */
+/* ============================ Fast commands ============================ */
 const MR_MONTHS = ['जानेवारी', 'फेब्रुवारी', 'मार्च', 'एप्रिल', 'मे', 'जून', 'जुलै', 'ऑगस्ट', 'सप्टेंबर', 'ऑक्टोबर', 'नोव्हेंबर', 'डिसेंबर'];
 const MR_DAYS = ['रविवार', 'सोमवार', 'मंगळवार', 'बुधवार', 'गुरुवार', 'शुक्रवार', 'शनिवार'];
 const OPEN_WORDS = ['उघड', 'open', 'ओपन', 'opan', 'oepn', 'सुरू', 'start', 'launch', 'लाव', 'चालू', 'ughad', 'khol'];
-const FILLER = new Set(['youtube', 'युट्यूब', 'google', 'गुगल', 'search', 'सर्च', 'शोध', 'शोधा', 'उघड', 'उघडा', 'कर', 'करा', 'वर', 'open', 'on', 'in', 'for', 'साठी', 'ughad', 'khol']);
+/* "intent" words: user clearly asks for an action (open / play / show / search) */
+const INTENT_WORDS = [...OPEN_WORDS, 'play', 'वाजव', 'वाजवा', 'ऐकव', 'ऐकवा', 'दाखव', 'दाखवा', 'show', 'search', 'सर्च', 'शोध', 'शोधा', 'navigate', 'directions', 'take me', 'जायचे'];
+const FILLER = new Set(['youtube', 'युट्यूब', 'google', 'गुगल', 'search', 'सर्च', 'शोध', 'शोधा', 'उघड', 'उघडा', 'कर', 'करा', 'वर', 'open', 'on', 'in', 'for', 'साठी', 'ughad', 'khol', 'please', 'the', 'a']);
 const extractTerm = (q, extra = new Set()) => q.split(/\s+/).filter(w => !FILLER.has(w) && !extra.has(w)).join(' ');
 
 class Ctx {
-  constructor(q) { this.query = q.trim(); this.q = this.query.toLowerCase(); this.words = this.q.split(/\s+/).filter(Boolean); this.short = this.words.length <= 6; this.explicitOpen = hasAny(this.q, OPEN_WORDS); this.wantsOpen = this.explicitOpen || this.words.length <= 2; }
+  constructor(q) {
+    this.query = q.trim(); this.q = this.query.toLowerCase(); this.words = this.q.split(/\s+/).filter(Boolean); this.short = this.words.length <= 6;
+    this.explicitOpen = hasAny(this.q, OPEN_WORDS); this.intent = hasAny(this.q, INTENT_WORDS);
+    this.wantsOpen = this.explicitOpen || this.words.length === 1;
+  }
 }
-const openUrl = url => { const w = window.open(url, '_blank', 'noopener,noreferrer'); if (!w) showToast('Pop-up ब्लॉक झाला आहे; ब्राउझरमध्ये पॉप-अप Allow करा.'); };
+const openUrl = url => { const w = window.open(url, '_blank', 'noopener,noreferrer'); if (!w) showToast(L('Pop-up ब्लॉक झाला; ब्राउझरमध्ये Allow करा.', 'Pop-up blocked; please allow pop-ups.')); };
+
 function timeText() {
-  const n = new Date(), h = n.getHours();
+  const n = new Date(), h = n.getHours(), mm = String(n.getMinutes()).padStart(2, '0');
+  if (LANG === 'en') return `It's ${h % 12 || 12}:${mm} ${h < 12 ? 'AM' : 'PM'} right now.`;
   const p = h < 12 ? 'सकाळचे' : h < 16 ? 'दुपारचे' : h < 20 ? 'संध्याकाळचे' : 'रात्रीचे';
-  return `सध्या ${p} ${h % 12 || 12}:${String(n.getMinutes()).padStart(2, '0')} वाजले आहेत.`;
+  return `सध्या ${p} ${h % 12 || 12}:${mm} वाजले आहेत.`;
 }
-function dateText() { const n = new Date(); return `आजची तारीख ${n.getDate()} ${MR_MONTHS[n.getMonth()]} ${n.getFullYear()}, ${MR_DAYS[n.getDay()]} आहे.`; }
-function fmtDur(s) { s = Math.max(0, Math.floor(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60, p = []; if (h) p.push(h + ' तास'); if (m) p.push(m + ' मिनिट'); if (x || !p.length) p.push(x + ' सेकंद'); return p.join(' '); }
+function dateText() {
+  const n = new Date();
+  if (LANG === 'en') return `Today is ${n.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}.`;
+  return `आजची तारीख ${n.getDate()} ${MR_MONTHS[n.getMonth()]} ${n.getFullYear()}, ${MR_DAYS[n.getDay()]} आहे.`;
+}
+function fmtDur(s) {
+  s = Math.max(0, Math.floor(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60, p = [];
+  if (h) p.push(h + L(' तास', ' hr')); if (m) p.push(m + L(' मिनिट', ' min')); if (x || !p.length) p.push(x + L(' सेकंद', ' sec'));
+  return p.join(' ');
+}
 
 /* ---- reminders ---- */
 const NUMBER_WORDS = { 'एक': 1, 'दोन': 2, 'तीन': 3, 'चार': 4, 'पाच': 5, 'सहा': 6, 'सात': 7, 'आठ': 8, 'नऊ': 9, 'दहा': 10, 'पंधरा': 15, 'वीस': 20, 'तीस': 30, 'चाळीस': 40, 'पन्नास': 50, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, fifteen: 15, twenty: 20, thirty: 30 };
@@ -636,7 +650,7 @@ function parseClock(text) {
   return null;
 }
 const REMIND_WORDS = ['आठवण', 'आठव', 'remind', 'रिमाइंडर', 'reminder', 'reminders', 'टायमर', 'timer', 'timers', 'अलार्म', 'alarm', 'उठव', 'उठवा', 'wake me'];
-const REM_FILLER = new Set('उद्या tomorrow सकाळी संध्याकाळी रात्री दुपारी पहाटे morning evening night afternoon at वाजता am pm उठव उठवा wake up वाजून मला माझी माझा आठवण आठव आठवा आठवून करून करुन दे द्या remind me to in after reminder set a an the timer रिमाइंडर टायमर अलार्म alarm लाव लावा सेट कर करा नंतर ने ला साठी for of ची चा चे द्यायची please'.split(' '));
+const REM_FILLER = new Set('उद्या tomorrow सकाळी संध्याकाळी रात्री दुपारी पहाटे morning evening night afternoon at वाजता am pm उठव उठवा wake up वाजून मला माझी माझा आठवण आठव आठवा आठवून करून करुन दे द्या remind me to in after reminder set a an the timer रिमाइंडर टायमर अलार्म alarm लाव लावा सेट कर करा नंतर ने ला साठी for of ची चा चे द्यायची please minutes minute mins min hours hour'.split(' '));
 const reminders = new Map(); let remSeq = 0;
 function addReminder(secs, text) {
   if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission();
@@ -645,7 +659,8 @@ function addReminder(secs, text) {
   reminders.set(id, { text, due: Date.now() + secs * 1000, t });
 }
 function fireReminder(text) {
-  appendMessage('ai', '⏰ ' + text); beep('alarm'); speak(text);
+  appendMessage('ai', '⏰ ' + text); beep('alarm');
+  const prev = LANG; LANG = detectLang(text); speak(text); LANG = prev;
   try { if ('Notification' in window && Notification.permission === 'granted') new Notification('ZARA', { body: text }); } catch {}
 }
 function h_reminder(c) {
@@ -653,35 +668,41 @@ function h_reminder(c) {
   const nouns = ['रिमाइंडर', 'reminder', 'reminders', 'टायमर', 'timer', 'timers', 'अलार्म', 'alarm'];
   if (hasAny(q, nouns) && hasAny(q, ['रद्द', 'cancel', 'clear', 'delete', 'काढून टाक', 'पुसून'])) {
     const n = reminders.size; reminders.forEach(r => clearTimeout(r.t)); reminders.clear();
-    return n ? `${n} रिमाइंडर रद्द केले.` : 'कोणताही रिमाइंडर सेट केलेला नाही.';
+    return n ? L(`${n} रिमाइंडर रद्द केले.`, `${n} reminder(s) cancelled.`) : L('कोणताही रिमाइंडर सेट केलेला नाही.', 'No reminders are set.');
   }
   let parsed = parseDuration(c.query), target = null;
   if (!parsed) { const ck = parseClock(c.query); if (ck) { parsed = { secs: ck.secs, rest: ck.rest }; target = ck.target; } }
   if (!parsed) {
-    if (hasAny(q, ['set', 'लाव', 'सेट', 'कर', 'करा']) && hasAny(q, ['timer', 'टायमर', 'reminder', 'रिमाइंडर', 'alarm', 'अलार्म'])) return "किती वेळाचा? उदाहरणार्थ 'पाच मिनिटांचा टायमर' किंवा 'सकाळी सात वाजता उठव' म्हणा.";
+    if (hasAny(q, ['set', 'लाव', 'सेट', 'कर', 'करा']) && hasAny(q, ['timer', 'टायमर', 'reminder', 'रिमाइंडर', 'alarm', 'अलार्म']))
+      return L("किती वेळाचा? उदाहरणार्थ 'पाच मिनिटांचा टायमर' किंवा 'सकाळी सात वाजता उठव' म्हणा.", "For how long? For example 'set a 5 minute timer' or 'wake me at 7:30 am'.");
     if (c.words.length <= 4 && hasAny(q, ['reminders', 'reminder', 'रिमाइंडर', 'टायमर', 'timer', 'timers'])) {
-      if (!reminders.size) return 'कोणताही रिमाइंडर सेट केलेला नाही.';
-      const items = [...reminders.values()].sort((a, b) => a.due - b.due).map(i => `${fmtDur((i.due - Date.now()) / 1000)} नंतर: ${i.text}`);
-      return `${items.length} रिमाइंडर आहेत. ` + items.join('; ');
+      if (!reminders.size) return L('कोणताही रिमाइंडर सेट केलेला नाही.', 'No reminders are set.');
+      const items = [...reminders.values()].sort((a, b) => a.due - b.due).map(i => `${L('', 'in ')}${fmtDur((i.due - Date.now()) / 1000)}${L(' नंतर', '')}: ${i.text}`);
+      return L(`${items.length} रिमाइंडर आहेत. `, `${items.length} reminder(s). `) + items.join('; ');
     }
     return null;
   }
   const { secs, rest } = parsed;
-  if (secs <= 0) return 'वेळ शून्यापेक्षा जास्त हवी.';
-  if (secs > 48 * 3600) return 'मी जास्तीत जास्त 48 तासांचा रिमाइंडर लावू शकते.';
+  if (secs <= 0) return L('वेळ शून्यापेक्षा जास्त हवी.', 'The time must be greater than zero.');
+  if (secs > 48 * 3600) return L('मी जास्तीत जास्त 48 तासांचा रिमाइंडर लावू शकते.', 'I can set a reminder for at most 48 hours.');
   const msg = removeWords(rest, REM_FILLER);
-  const tab = ' (हा टॅब उघडा ठेवा.)';
-  if (target) { addReminder(secs, msg ? `रिमाइंडर: ${msg}` : 'तुमचा अलार्म वाजला.'); const p = n => String(n).padStart(2, '0'); return `ठीक आहे, ${p(target.getDate())}/${p(target.getMonth() + 1)} ${p(target.getHours())}:${p(target.getMinutes())} ला (${fmtDur(secs)} नंतर) ${msg ? 'आठवण करून देईन' : 'अलार्म वाजवेन'}.` + tab; }
-  if (msg) { addReminder(secs, `रिमाइंडर: ${msg}`); return `ठीक आहे, ${fmtDur(secs)} नंतर आठवण करून देईन.` + tab; }
-  addReminder(secs, 'तुमचा टायमर संपला.'); return `ठीक आहे, ${fmtDur(secs)} चा टायमर सुरू केला.` + tab;
+  const tab = L(' (हा टॅब उघडा ठेवा.)', ' (Keep this tab open.)');
+  const p = n => String(n).padStart(2, '0');
+  if (target) {
+    addReminder(secs, msg ? L(`रिमाइंडर: ${msg}`, `Reminder: ${msg}`) : L('तुमचा अलार्म वाजला.', 'Your alarm is ringing.'));
+    return L(`ठीक आहे, ${p(target.getDate())}/${p(target.getMonth() + 1)} ${p(target.getHours())}:${p(target.getMinutes())} ला (${fmtDur(secs)} नंतर) ${msg ? 'आठवण करून देईन' : 'अलार्म वाजवेन'}.`,
+      `Okay, at ${p(target.getDate())}/${p(target.getMonth() + 1)} ${p(target.getHours())}:${p(target.getMinutes())} (in ${fmtDur(secs)}) I'll ${msg ? 'remind you' : 'ring the alarm'}.`) + tab;
+  }
+  if (msg) { addReminder(secs, L(`रिमाइंडर: ${msg}`, `Reminder: ${msg}`)); return L(`ठीक आहे, ${fmtDur(secs)} नंतर आठवण करून देईन.`, `Okay, I'll remind you in ${fmtDur(secs)}.`) + tab; }
+  addReminder(secs, L('तुमचा टायमर संपला.', 'Your timer is up.')); return L(`ठीक आहे, ${fmtDur(secs)} चा टायमर सुरू केला.`, `Okay, ${fmtDur(secs)} timer started.`) + tab;
 }
 let swStart = null;
 function h_stopwatch(c) {
   if (!hasAny(c.q, ['stopwatch', 'स्टॉपवॉच', 'स्टॉप वॉच'])) return null;
-  if (swStart === null) { swStart = Date.now(); return 'स्टॉपवॉच सुरू केले.'; }
+  if (swStart === null) { swStart = Date.now(); return L('स्टॉपवॉच सुरू केले.', 'Stopwatch started.'); }
   const el = (Date.now() - swStart) / 1000;
-  if (hasAny(c.q, ['किती', 'how much', 'check', 'दाखव', 'show', 'status'])) return `आतापर्यंत ${fmtDur(el)} झाले.`;
-  swStart = null; return `स्टॉपवॉच थांबवले. एकूण वेळ ${fmtDur(el)}.`;
+  if (hasAny(c.q, ['किती', 'how much', 'check', 'दाखव', 'show', 'status'])) return L(`आतापर्यंत ${fmtDur(el)} झाले.`, `${fmtDur(el)} so far.`);
+  swStart = null; return L(`स्टॉपवॉच थांबवले. एकूण वेळ ${fmtDur(el)}.`, `Stopwatch stopped. Total time ${fmtDur(el)}.`);
 }
 
 /* ---- calculator ---- */
@@ -690,19 +711,19 @@ const CALC_WORD_OPS = [['multiplied by', '*'], ['divided by', '/'], ['raised to'
 const TWO_NUM_OPS = [['बेरीज', '+'], ['वजाबाकी', '-'], ['गुणाकार', '*'], ['भागाकार', '/'], ['sum of', '+'], ['product of', '*']];
 function fmtNum(v) { if (!isFinite(v)) throw new Error('bad'); return Number.isInteger(v) ? String(v) : String(Math.round(v * 10000) / 10000); }
 function calcResult(expr) {
-  if (expr.length > 80) return 'ही गणना खूप मोठी आहे.';
+  if (expr.length > 80) return L('ही गणना खूप मोठी आहे.', 'That calculation is too long.');
   try {
     if (!/^[0-9+\-*/().\s]+$/.test(expr) || /\*\*\s*\d{3,}/.test(expr)) return null;
     const v = Function('"use strict";return (' + expr + ')')();
     if (typeof v !== 'number') return null;
-    if (!isFinite(v)) return 'शून्याने भागता येत नाही.';
-    return `उत्तर ${fmtNum(v)} आहे.`;
+    if (!isFinite(v)) return L('शून्याने भागता येत नाही.', 'Cannot divide by zero.');
+    return L(`उत्तर ${fmtNum(v)} आहे.`, `The answer is ${fmtNum(v)}.`);
   } catch { return null; }
 }
 function tryCalculate(q) {
   let t = toAscii(q.toLowerCase()).replace(/(?<=\d),(?=\d{3})/g, '');
   const pm = t.match(/(\d+(?:\.\d+)?)\s*(?:%|टक्के|टक्का|percent|per cent)\s*(?:of|चे|च्या|ची|चा)?\s*(\d+(?:\.\d+)?)/);
-  if (pm) return `${pm[1]} टक्के म्हणजे ${fmtNum(parseFloat(pm[1]) * parseFloat(pm[2]) / 100)}.`;
+  if (pm) { const v = fmtNum(parseFloat(pm[1]) * parseFloat(pm[2]) / 100); return L(`${pm[2]} चे ${pm[1]} टक्के म्हणजे ${v}.`, `${pm[1]}% of ${pm[2]} is ${v}.`); }
   const pure = /^[\d\s+\-*/().x×÷^]+$/.test(t);
   if (!(pure || hasAny(t, CALC_TRIGGERS))) return null;
   const nums = t.match(/\d+(?:\.\d+)?/g) || [];
@@ -716,15 +737,19 @@ function tryCalculate(q) {
 }
 
 /* ---- weather ---- */
-const WEATHER_FILLER = new Set('हवामान weather तापमान temperature आज आजचे आजचं सध्या उद्या tomorrow today किती काय आहे आहेत in of the what is how मध्ये चे ची चा forecast like सांग सांगा tell me now current इथे इथला कसे कसं आता for at cha chi che madhe havaman mausam'.split(' '));
+const WEATHER_FILLER = new Set('हवामान weather तापमान temperature आज आजचे आजचं सध्या उद्या tomorrow today किती काय आहे आहेत in of the what is how मध्ये चे ची चा forecast like सांग सांगा tell me now current इथे इथला कसे कसं आता for at cha chi che madhe havaman mausam whats'.split(' '));
 async function getWeather(city, tomorrow) {
   const r = await fetchT(`https://wttr.in/${encodeURIComponent(city)}?format=j1`, {}, 10000);
   if (!r.ok) throw new Error('weather ' + r.status);
   const d = await r.json(); let area = ''; try { area = d.nearest_area[0].areaName[0].value; } catch {}
-  const place = area ? `${area} मध्ये` : 'तुमच्या भागात';
-  if (tomorrow) { const day = d.weather[1]; let desc = ''; try { desc = day.hourly[4].weatherDesc[0].value; } catch {} return `उद्या ${place} कमाल ${day.maxtempC} आणि किमान ${day.mintempC} अंश सेल्सिअस तापमान असेल${desc ? ', हवामान: ' + desc : ''}.`; }
+  if (tomorrow) {
+    const day = d.weather[1]; let desc = ''; try { desc = day.hourly[4].weatherDesc[0].value; } catch {}
+    return L(`उद्या ${area ? area + ' मध्ये' : 'तुमच्या भागात'} कमाल ${day.maxtempC} आणि किमान ${day.mintempC} अंश सेल्सिअस तापमान असेल${desc ? ', हवामान: ' + desc : ''}.`,
+      `Tomorrow ${area ? 'in ' + area : 'in your area'}: high ${day.maxtempC}°C, low ${day.mintempC}°C${desc ? ', ' + desc : ''}.`);
+  }
   const cur = d.current_condition[0];
-  return `${place} सध्या ${cur.temp_C} अंश सेल्सिअस तापमान आहे, जाणवते ${cur.FeelsLikeC} अंश, आर्द्रता ${cur.humidity} टक्के, हवामान: ${cur.weatherDesc[0].value}.`;
+  return L(`${area ? area + ' मध्ये' : 'तुमच्या भागात'} सध्या ${cur.temp_C} अंश सेल्सिअस तापमान आहे, जाणवते ${cur.FeelsLikeC} अंश, आर्द्रता ${cur.humidity} टक्के, हवामान: ${cur.weatherDesc[0].value}.`,
+    `${area ? 'In ' + area : 'In your area'} it's ${cur.temp_C}°C right now, feels like ${cur.FeelsLikeC}°C, humidity ${cur.humidity}%, ${cur.weatherDesc[0].value}.`);
 }
 
 /* ---- data ---- */
@@ -737,192 +762,210 @@ const SITES = [
   ['GitHub', 'https://github.com', ['github', 'गिटहब']], ['Amazon', 'https://www.amazon.in', ['amazon', 'अमेझॉन', 'ऍमेझॉन']], ['Flipkart', 'https://www.flipkart.com', ['flipkart', 'फ्लिपकार्ट']],
   ['Netflix', 'https://www.netflix.com', ['netflix', 'नेटफ्लिक्स']], ['Hotstar', 'https://www.hotstar.com', ['hotstar', 'हॉटस्टार']], ['Spotify', 'https://open.spotify.com', ['spotify', 'स्पॉटिफाय']],
   ['IRCTC', 'https://www.irctc.co.in', ['irctc']], ['Zomato', 'https://www.zomato.com', ['zomato', 'झोमॅटो']], ['Swiggy', 'https://www.swiggy.com', ['swiggy', 'स्विगी']],
-  ['Google Maps', 'https://maps.google.com', ['maps', 'google maps']]
+  ['Google Maps', 'https://maps.google.com', ['google maps']]
 ];
 const DESKTOP_ONLY_APPS = ['notepad', 'नोटपॅड', 'calculator', 'कॅल्क्युलेटर', 'paint', 'पेंट', 'word', 'वर्ड', 'excel', 'एक्सेल', 'powerpoint', 'पॉवरपॉइंट', 'task manager', 'टास्क मॅनेजर', 'file explorer', 'फाइल एक्सप्लोरर', 'command prompt', 'cmd', 'terminal', 'टर्मिनल', 'powershell', 'vs code', 'vscode', 'camera', 'कॅमेरा'];
-const JOKES = [
+const JOKES_MR = [
   'शिक्षक: जगातला सगळ्यात वेगवान प्राणी कोणता? पिंटू: बाई, वायफाय; कारण तो दिसत नाही आणि सगळीकडे पोहोचतो!',
   'मी रोज सकाळी व्यायाम करायचं ठरवतो. पण अलार्म वाजला की माझा उत्साह स्नूझ होतो.',
   'मोबाइलची बॅटरी आणि माझी इच्छाशक्ती सारखीच; दोन्ही सोमवारी सगळ्यात आधी संपतात.',
   'डॉक्टर म्हणाले रोज वीस मिनिटे चाला. मी म्हटलं, चार्जिंगची वायर किती लांब आहे ते आधी बघतो.',
   'पिंटू: बाबा, सगळे म्हणतात कॉपी करू नका, पण आयुष्यात तर सगळे कॉपी पेस्टच करतात! बाबा: मग आधी अभ्यासाचा सेव्ह बटण दाब!'
 ];
-const HELP_TEXT = "मी हे करू शकते: कोणत्याही प्रश्नाचे AI उत्तर, HTML/Python कोड बनवणे (Copy/Download/Preview सह), वेळ आणि तारीख, रिमाइंडर आणि टायमर (उदा. 'पाच मिनिटांनी चहा आठव'), नोट्स आणि टास्क, गणना, हवामान, गाणी आणि YouTube, नकाशा, बातम्या, Wikipedia, वेबसाइट्स उघडणे, बॅटरी/सिस्टम माहिती, क्लिपबोर्ड सारांश, विनोद आणि बरेच काही.";
-const SYS_ONLY_MSG = 'हे ब्राउझरमधून शक्य नाही. लॅपटॉप नियंत्रण (shutdown, ब्राइटनेस, व्हॉल्यूम, अॅप्स) फक्त Python ZARA आवृत्तीत चालते.';
+const JOKES_EN = [
+  "Why do programmers prefer dark mode? Because light attracts bugs.",
+  "I told my phone I needed space. Now it keeps saying 'Storage almost full'.",
+  "Why was the computer cold? It left its Windows open.",
+  "My Wi-Fi and I have a lot in common: we both disconnect when things get stressful.",
+  "I'd tell you a UDP joke, but you might not get it."
+];
+const HELP_MR = "मी हे करू शकते: कोणत्याही प्रश्नाचे AI उत्तर, HTML/Python कोड बनवणे (Copy/Download/Preview सह), वेळ आणि तारीख, रिमाइंडर आणि टायमर, नोट्स आणि टास्क, गणना, हवामान, गाणी आणि YouTube, नकाशा, बातम्या, Wikipedia, वेबसाइट्स उघडणे (तुम्ही सांगाल तेव्हाच), बॅटरी/सिस्टम माहिती, क्लिपबोर्ड सारांश, विनोद आणि बरेच काही.";
+const HELP_EN = "I can: answer any question with AI, write HTML/Python code (with Copy/Download/Preview), tell time and date, set reminders and timers, keep notes and tasks, calculate, check weather, play songs on YouTube, open maps/news/Wikipedia/websites (only when you ask), show battery/system info, summarize your clipboard, tell jokes and more.";
+const SYS_ONLY = () => L('हे ब्राउझरमधून शक्य नाही. लॅपटॉप नियंत्रण (shutdown, ब्राइटनेस, व्हॉल्यूम, अॅप्स) फक्त Python ZARA आवृत्तीत चालते.', 'That is not possible from a browser. Laptop control (shutdown, brightness, volume, apps) works only in the Python ZARA app.');
 const MUSIC_FILLER = new Set('गाणे गाणं गाणी song songs music संगीत play लाव लावा वाजव वाजवा ऐकव ऐकवा सुरू a the me मला माझे द्या दे एक चे ची चा please यूट्यूबवर on'.split(' '));
-const MAP_FILLER = new Set('map maps नकाशा नकाशात navigate directions direction route रस्ता मार्ग show दाखव दाखवा to near me जवळचे जवळची जवळचा nearby find शोध शोधा how get कसे कसा जायचे ला मध्ये उघड उघडा'.split(' '));
+const MAP_FILLER = new Set('map maps नकाशा नकाशात navigate directions direction route रस्ता मार्ग show दाखव दाखवा to near me जवळचे जवळची जवळचा nearby find शोध शोधा how get कसे कसा जायचे ला मध्ये उघड उघडा take'.split(' '));
 const NEWS_FILLER = new Set('news बातम्या बातमी latest about बद्दल ताज्या आजच्या आजची today of on दाखव दाखवा show me सांग सांगा tell headlines'.split(' '));
 const WIKI_FILLER = new Set('wikipedia विकिपीडिया about बद्दल माहिती information ची चे अर्थ'.split(' '));
-let pendingConfirm = null;
 
 /* ---- handlers: string किंवा null (पुढच्याकडे जा) ---- */
+const TIME_RE = /(what('s| is)? (the )?(current )?time|current time|time now|time please|tell me the time|^time\??$|\b(time|vel)\s+(kay|kiti)\b)/;
+const DATE_RE = /(what('s| is)? (the |today'?s? )?date|today'?s date|^date\??$|\btarikh\b)/;
 const HANDLERS = [
-  c => { // clear chat
-    if (['clear chat', 'clear', 'reset chat', 'chat clear', 'चॅट साफ', 'चॅट क्लिअर'].includes(c.q) || hasAny(c.q, ['chat saaf', 'चॅट साफ'])) { chatMessages.innerHTML = ''; return 'चॅट साफ केला! पुढचे काम सांगा.'; }
+  c => {
+    if (['clear chat', 'clear', 'reset chat', 'chat clear', 'चॅट साफ', 'चॅट क्लिअर'].includes(c.q) || hasAny(c.q, ['chat saaf', 'चॅट साफ'])) { chatMessages.innerHTML = ''; return L('चॅट साफ केला! पुढचे काम सांगा.', 'Chat cleared! What next?'); }
     return null;
   },
-  c => { // forget
-    if (hasAny(c.q, ['सगळे विसर', 'सर्व विसर', 'forget everything', 'नवीन संवाद'])) { history = []; store.set('zara_history', []); return 'ठीक आहे, आधीचे सगळे विसरले. नवीन संवाद सुरू करू.'; }
+  c => {
+    if (hasAny(c.q, ['सगळे विसर', 'सर्व विसर', 'forget everything', 'नवीन संवाद'])) { history = []; store.set('zara_history', []); return L('ठीक आहे, आधीचे सगळे विसरले. नवीन संवाद सुरू करू.', 'Okay, I forgot everything. Fresh start.'); }
     return null;
   },
-  c => { // hello
+  c => {
     if (['hi', 'hii', 'hiii', 'hey', 'hello', 'namaste', 'namaskar', 'नमस्कार', 'हॅलो', 'नमस्ते', 'hello zara'].includes(c.q) || (/^(hi|hello|hey|namaste|namaskar|good morning|good afternoon|good evening)\b/.test(c.q) && c.words.length <= 2)) {
-      const h = new Date().getHours(), g = h < 12 ? 'शुभ प्रभात' : h < 16 ? 'शुभ दुपार' : 'शुभ संध्याकाळ';
-      return `${g}${settings.name ? ' ' + settings.name : ''}! मी ZARA तयार आहे, काय काम सांगायचे आहे?`;
+      const h = new Date().getHours(), who = settings.name ? ' ' + settings.name : '';
+      const gMr = h < 12 ? 'शुभ प्रभात' : h < 16 ? 'शुभ दुपार' : 'शुभ संध्याकाळ', gEn = h < 12 ? 'Good morning' : h < 16 ? 'Good afternoon' : 'Good evening';
+      return L(`${gMr}${who}! मी ZARA तयार आहे, काय काम सांगायचे आहे?`, `${gEn}${who}! I'm ZARA, ready to help. What do you need?`);
     }
     return null;
   },
-  c => (c.words.length <= 2 && hasAny(c.q, ['मदत', 'help', 'फीचर्स', 'features'])) || (c.short && hasAny(c.q, ['काय करू शकतेस', 'काय काय करू शकतेस', 'what can you do'])) ? HELP_TEXT : null,
-  c => (c.words.length <= 2 && hasAny(c.q, ['bye', 'बाय', 'goodbye', 'गुडबाय', 'अलविदा'])) ? 'ठीक आहे, पुन्हा भेटूया!' : null,
+  c => (c.words.length <= 2 && hasAny(c.q, ['मदत', 'help', 'फीचर्स', 'features'])) || (c.short && hasAny(c.q, ['काय करू शकतेस', 'काय काय करू शकतेस', 'what can you do'])) ? L(HELP_MR, HELP_EN) : null,
+  c => (c.words.length <= 2 && hasAny(c.q, ['bye', 'बाय', 'goodbye', 'गुडबाय', 'अलविदा'])) ? L('ठीक आहे, पुन्हा भेटूया!', 'Okay, see you again!') : null,
   h_reminder, h_stopwatch,
   c => { // notes
     const q = c.q, add = ['नोट कर', 'नोट करा', 'नोट करून', 'नोट ठेव', 'नोट ठेवा', 'नोट लिहून', 'लिहून ठेव', 'लिहून ठेवा', 'लिहून घे', 'लिहून घ्या', 'note down', 'take a note', 'make a note', 'add note', 'note this', 'note:', 'नोट:'];
     if (hasAny(q, add)) {
-      const text = stripPhrases(c.query, add); if (!text) return "काय लिहून ठेवू? उदाहरणार्थ 'नोट कर: दूध आणायचे'.";
-      const n = getNotes(); n.push({ t: new Date().toISOString(), text }); store.set('zara_notes', n); return 'नोट सेव्ह केली.';
+      const text = stripPhrases(c.query, add); if (!text) return L("काय लिहून ठेवू? उदाहरणार्थ 'नोट कर: दूध आणायचे'.", "What should I note? For example 'note: buy milk'.");
+      const n = getNotes(); n.push({ t: new Date().toISOString(), text }); store.set('zara_notes', n); return L('नोट सेव्ह केली.', 'Note saved.');
     }
-    if (c.short && hasAny(q, ['नोट्स', 'notes'])) {
-      if (hasAny(q, ['पुसून', 'clear', 'delete', 'काढून'])) { store.set('zara_notes', []); return 'सगळ्या नोट्स पुसल्या.'; }
-      const n = getNotes().slice(-5); return n.length ? 'शेवटच्या नोट्स: ' + n.map(x => x.text).join('; ') : 'तुमच्या कोणत्याही नोट्स नाहीत.';
+    if (hasAny(q, ['नोट्स', 'notes']) && (c.words.length <= 3 || hasAny(q, ['my', 'show', 'list', 'दाखव', 'माझ्या', 'शेवटच्या']))) {
+      if (hasAny(q, ['पुसून', 'clear', 'delete', 'काढून'])) { store.set('zara_notes', []); return L('सगळ्या नोट्स पुसल्या.', 'All notes cleared.'); }
+      const n = getNotes().slice(-5); return n.length ? L('शेवटच्या नोट्स: ', 'Latest notes: ') + n.map(x => x.text).join('; ') : L('तुमच्या कोणत्याही नोट्स नाहीत.', 'You have no notes.');
     }
     return null;
   },
   c => { // todo
-    const q = c.q, keys = ['टास्क', 'task', 'todo', 'to-do', 'टूडू', 'कामांची यादी'];
+    const q = c.q, keys = ['टास्क', 'task', 'tasks', 'todo', 'to-do', 'टूडू', 'कामांची यादी'];
     if (!hasAny(q, keys) || hasAny(q, ['manager', 'मॅनेजर', 'scheduler', 'view', 'व्ह्यू'])) return null;
     const todos = getTodos(), pending = todos.filter(t => !t.done), digits = toAscii(q).match(/\d+/g);
-    if (hasAny(q, ['clear', 'पुसून', 'सगळे काढ'])) { store.set('zara_todos', []); return 'सगळी टास्क यादी पुसली.'; }
+    if (hasAny(q, ['clear', 'पुसून', 'सगळे काढ'])) { store.set('zara_todos', []); return L('सगळी टास्क यादी पुसली.', 'Task list cleared.'); }
     if (digits && hasAny(q, ['पूर्ण', 'done', 'complete', 'काढ', 'remove', 'delete'])) {
-      const n = parseInt(digits[0]); if (n < 1 || n > pending.length) return `${n} क्रमांकाचे टास्क सापडले नाही.`;
-      pending[n - 1].done = true; store.set('zara_todos', todos); return `टास्क ${n} पूर्ण केले: ${pending[n - 1].text}.`;
+      const n = parseInt(digits[0]); if (n < 1 || n > pending.length) return L(`${n} क्रमांकाचे टास्क सापडले नाही.`, `Task ${n} not found.`);
+      pending[n - 1].done = true; store.set('zara_todos', todos); return L(`टास्क ${n} पूर्ण केले: ${pending[n - 1].text}.`, `Task ${n} done: ${pending[n - 1].text}.`);
     }
     if (hasAny(q, ['जोड', 'add', 'ऍड', 'अॅड', 'टाक'])) {
-      const text = stripPhrases(c.query, [...keys, 'जोड', 'जोडा', 'add', 'ऍड', 'अॅड', 'टाक', 'टाका', 'यादीत', 'to', 'my', 'list', 'माझ्या']);
-      if (!text) return "कोणते टास्क जोडू? उदाहरणार्थ 'टास्क जोड: वीज बिल भरणे'.";
-      todos.push({ text, done: false }); store.set('zara_todos', todos); return `टास्क जोडले: ${text}.`;
+      const text = stripPhrases(c.query, [...keys, 'जोड', 'जोडा', 'add', 'ऍड', 'अॅड', 'टाक', 'टाका', 'यादीत', 'to', 'my', 'list', 'माझ्या', 'a', 'new']);
+      if (!text) return L("कोणते टास्क जोडू? उदाहरणार्थ 'टास्क जोड: वीज बिल भरणे'.", "Which task should I add? For example 'add task: pay electricity bill'.");
+      todos.push({ text, done: false }); store.set('zara_todos', todos); return L(`टास्क जोडले: ${text}.`, `Task added: ${text}.`);
     }
-    if (c.short) return pending.length ? `तुमची ${pending.length} कामे बाकी आहेत: ` + pending.map((t, i) => `${i + 1}. ${t.text}`).join('; ') + '.' : 'तुमच्याकडे कोणतेही टास्क बाकी नाही.';
+    if (c.words.length <= 3 || hasAny(q, ['my', 'list', 'show', 'pending', 'दाखव', 'यादी', 'माझे', 'माझी', 'बाकी']))
+      return pending.length ? L(`तुमची ${pending.length} कामे बाकी आहेत: `, `You have ${pending.length} pending task(s): `) + pending.map((t, i) => `${i + 1}. ${t.text}`).join('; ') + '.' : L('तुमच्याकडे कोणतेही टास्क बाकी नाही.', 'You have no pending tasks.');
     return null;
   },
   c => tryCalculate(c.q),
   c => { // name
-    if (hasAny(c.q, ['माझे नाव काय', 'माझं नाव काय', 'what is my name', "what's my name", 'मी कोण आहे'])) return settings.name ? `तुमचे नाव ${settings.name} आहे.` : "मला तुमचे नाव माहीत नाही. 'माझे नाव ... आहे' असे सांगा.";
+    if (hasAny(c.q, ['माझे नाव काय', 'माझं नाव काय', 'what is my name', "what's my name", 'मी कोण आहे'])) return settings.name ? L(`तुमचे नाव ${settings.name} आहे.`, `Your name is ${settings.name}.`) : L("मला तुमचे नाव माहीत नाही. 'माझे नाव ... आहे' असे सांगा.", "I don't know your name yet. Say 'my name is ...'.");
     for (const pat of [/(?:माझे|माझं)\s+नाव\s+(.+?)(?:\s+आहे)?\s*$/i, /my name is\s+(.+?)\s*$/i, /call me\s+(.+?)\s*$/i, /मला\s+(.+?)\s+म्हण(?:ा|ू)?\s*$/i]) {
       const m = pat.exec(c.query);
-      if (m) { const n = m[1].replace(/^[ .!,]+|[ .!,]+$/g, ''); if (n && n.length <= 30 && n.split(/\s+/).length <= 3) { settings.name = n; saveSettings(); setOrb(state.orb); return `ठीक आहे ${n}, आता मी तुम्हाला याच नावाने ओळखेन.`; } }
+      if (m) { const n = m[1].replace(/^[ .!,]+|[ .!,]+$/g, ''); if (n && n.length <= 30 && n.split(/\s+/).length <= 3) { settings.name = n; saveSettings(); setOrb(state.orb); return L(`ठीक आहे ${n}, आता मी तुम्हाला याच नावाने ओळखेन.`, `Okay ${n}, I'll call you that from now on.`); } }
     }
     return null;
   },
   c => { // voice settings
     const q = c.q;
-    if (hasAny(q, ['पुरुष आवाज', 'male voice', 'पुरुषाचा आवाज'])) { settings.gender = 'male'; saveSettings(); return 'ठीक आहे, आता पुरुष आवाजात बोलेन.'; }
-    if (hasAny(q, ['स्त्री आवाज', 'female voice', 'महिला आवाज'])) { settings.gender = 'female'; saveSettings(); return 'ठीक आहे, आता स्त्री आवाजात बोलेन.'; }
-    if (hasAny(q, ['जोरात बोल', 'faster', 'speak faster', 'वेग वाढव'])) { settings.rate = Math.min(1.5, settings.rate + 0.15); saveSettings(); return 'आता वेगाने बोलेन.'; }
-    if (hasAny(q, ['हळू बोल', 'slower', 'speak slower', 'वेग कमी'])) { settings.rate = Math.max(0.7, settings.rate - 0.15); saveSettings(); return 'आता हळू बोलेन.'; }
+    if (hasAny(q, ['पुरुष आवाज', 'male voice', 'पुरुषाचा आवाज'])) { settings.gender = 'male'; saveSettings(); return L('ठीक आहे, आता पुरुष आवाजात बोलेन.', 'Okay, switching to a male voice.'); }
+    if (hasAny(q, ['स्त्री आवाज', 'female voice', 'महिला आवाज'])) { settings.gender = 'female'; saveSettings(); return L('ठीक आहे, आता स्त्री आवाजात बोलेन.', 'Okay, switching to a female voice.'); }
+    if (hasAny(q, ['जोरात बोल', 'faster', 'speak faster', 'वेग वाढव'])) { settings.rate = Math.min(1.5, settings.rate + 0.15); saveSettings(); return L('आता वेगाने बोलेन.', 'I will speak faster.'); }
+    if (hasAny(q, ['हळू बोल', 'slower', 'speak slower', 'वेग कमी'])) { settings.rate = Math.max(0.7, settings.rate - 0.15); saveSettings(); return L('आता हळू बोलेन.', 'I will speak slower.'); }
     return null;
   },
-  c => (c.words.length <= 4 && (new RegExp(`(?<![${DEV}])वेळ(?![${DEV}])`).test(c.q) || hasAny(c.q, ['time', 'वाजले', 'vel']))) ? timeText() : null,
-  c => (c.words.length <= 4 && hasAny(c.q, ['तारीख', 'date', 'tarikh'])) ? dateText() : null,
-  c => { // daily
+  c => (c.words.length <= 5 && (TIME_RE.test(c.q) || (c.words.length <= 4 && (new RegExp(`(?<![${DEV}])वेळ(?![${DEV}])`).test(c.q) || hasAny(c.q, ['वाजले']))))) ? timeText() : null,
+  c => (c.words.length <= 5 && (DATE_RE.test(c.q) || hasAny(c.q, ['तारीख']))) ? dateText() : null,
+  c => { // daily greetings
     const q = c.q; if (!c.short || !hasAny(q, ['good morning', 'गुड मॉर्निंग', 'सुप्रभात', 'शुभ प्रभात', 'good evening', 'शुभ संध्या', 'good night', 'शुभ रात्री', 'गुड नाईट'])) return null;
     const who = settings.name ? ', ' + settings.name : '';
-    if (hasAny(q, ['good night', 'शुभ रात्री', 'गुड नाईट'])) return `शुभ रात्री${who}! गोड स्वप्ने पाहा.`;
-    const h = new Date().getHours(), parts = [`${h < 12 ? 'शुभ प्रभात' : h < 16 ? 'शुभ दुपार' : 'शुभ संध्याकाळ'}${who}!`, dateText()];
-    const nt = getTodos().filter(t => !t.done).length; if (nt) parts.push(`तुमची ${nt} कामे बाकी आहेत.`); if (reminders.size) parts.push(`${reminders.size} रिमाइंडर सेट आहेत.`);
+    if (hasAny(q, ['good night', 'शुभ रात्री', 'गुड नाईट'])) return L(`शुभ रात्री${who}! गोड स्वप्ने पाहा.`, `Good night${who}! Sweet dreams.`);
+    const h = new Date().getHours(), nt = getTodos().filter(t => !t.done).length;
+    const parts = [L(`${h < 12 ? 'शुभ प्रभात' : h < 16 ? 'शुभ दुपार' : 'शुभ संध्याकाळ'}${who}!`, `${h < 12 ? 'Good morning' : h < 16 ? 'Good afternoon' : 'Good evening'}${who}!`), dateText()];
+    if (nt) parts.push(L(`तुमची ${nt} कामे बाकी आहेत.`, `You have ${nt} pending task(s).`)); if (reminders.size) parts.push(L(`${reminders.size} रिमाइंडर सेट आहेत.`, `${reminders.size} reminder(s) are set.`));
     return parts.join(' ');
   },
   async c => { // clipboard
     const q = c.q; if (!hasAny(q, ['clipboard', 'क्लिपबोर्ड', 'कॉपी केलेले', 'copied'])) return null;
-    let text = ''; try { text = await navigator.clipboard.readText(); } catch { return 'क्लिपबोर्ड वाचण्याची परवानगी मिळाली नाही.'; }
-    if (!text) return 'क्लिपबोर्ड रिकामा आहे.';
+    let text = ''; try { text = await navigator.clipboard.readText(); } catch { return L('क्लिपबोर्ड वाचण्याची परवानगी मिळाली नाही.', 'Clipboard permission was not granted.'); }
+    if (!text) return L('क्लिपबोर्ड रिकामा आहे.', 'The clipboard is empty.');
     if (hasAny(q, ['सारांश', 'summar', 'translate', 'भाषांतर', 'explain', 'समजाव', 'अर्थ', 'improve', 'सुधार', 'proofread'])) return await askAI(`${c.query}\n\n---\n${text.slice(0, 4000)}`);
-    return `क्लिपबोर्डमध्ये हे आहे: ${text.slice(0, 300)}`;
+    return L(`क्लिपबोर्डमध्ये हे आहे: ${text.slice(0, 300)}`, `Your clipboard has: ${text.slice(0, 300)}`);
   },
   c => { // desktop-only
     const q = c.q;
-    if (c.words.length <= 4 && hasAny(q, ['shutdown', 'shut down', 'शटडाऊन', 'शटडाउन', 'restart', 'reboot', 'रीस्टार्ट', 'लॅपटॉप बंद', 'sign out', 'log off', 'साइन आउट', 'लॉक कर', 'lock laptop', 'स्लीप', 'झोपव'])) return SYS_ONLY_MSG;
-    if (hasAny(q, ['brightness', 'ब्राइटनेस', 'volume up', 'volume down', 'volume max', 'mute', 'म्यूट', 'आवाज वाढव', 'आवाज कमी', 'आवाज बंद', 'व्हॉल्यूम वाढव', 'व्हॉल्यूम कमी', 'next song', 'पुढचे गाणे', 'previous song', 'मागचे गाणे', 'स्क्रीनशॉट', 'screenshot', 'show desktop', 'switch window'])) return SYS_ONLY_MSG;
+    if (c.words.length <= 4 && hasAny(q, ['shutdown', 'shut down', 'शटडाऊन', 'शटडाउन', 'restart', 'reboot', 'रीस्टार्ट', 'लॅपटॉप बंद', 'sign out', 'log off', 'साइन आउट', 'लॉक कर', 'lock laptop', 'स्लीप', 'झोपव'])) return SYS_ONLY();
+    if (hasAny(q, ['brightness', 'ब्राइटनेस', 'volume up', 'volume down', 'volume max', 'mute', 'म्यूट', 'आवाज वाढव', 'आवाज कमी', 'आवाज बंद', 'व्हॉल्यूम वाढव', 'व्हॉल्यूम कमी', 'next song', 'पुढचे गाणे', 'previous song', 'मागचे गाणे', 'स्क्रीनशॉट', 'screenshot', 'show desktop', 'switch window'])) return SYS_ONLY();
     return null;
   },
   async c => { // system
     const q = c.q; if (!c.short) return null;
-    const bat = async () => { if (!navigator.getBattery) return 'या ब्राउझरमध्ये बॅटरी माहिती उपलब्ध नाही'; const b = await navigator.getBattery(); return `बॅटरी ${Math.round(b.level * 100)} टक्के, ${b.charging ? 'चार्जिंग सुरू आहे' : 'चार्जर काढलेला आहे'}`; };
-    const disk = async () => { try { const e = await navigator.storage.estimate(); return `ब्राउझरला उपलब्ध स्टोरेज सुमारे ${((e.quota - e.usage) / 1024 ** 3).toFixed(0)} GB`; } catch { return 'स्टोरेज माहिती उपलब्ध नाही'; } };
-    const sys = () => `CPU कोर्स ${navigator.hardwareConcurrency || '?'}, प्लॅटफॉर्म ${navigator.platform || 'Web'}${navigator.deviceMemory ? ', RAM सुमारे ' + navigator.deviceMemory + ' GB' : ''}, नेटवर्क ${navigator.onLine ? 'ऑनलाइन' : 'ऑफलाइन'}`;
+    const bat = async () => { if (!navigator.getBattery) return L('या ब्राउझरमध्ये बॅटरी माहिती उपलब्ध नाही', 'Battery info is not available in this browser'); const b = await navigator.getBattery(); return L(`बॅटरी ${Math.round(b.level * 100)} टक्के, ${b.charging ? 'चार्जिंग सुरू आहे' : 'चार्जर काढलेला आहे'}`, `Battery ${Math.round(b.level * 100)}%, ${b.charging ? 'charging' : 'not charging'}`); };
+    const disk = async () => { try { const e = await navigator.storage.estimate(); return L(`ब्राउझरला उपलब्ध स्टोरेज सुमारे ${((e.quota - e.usage) / 1024 ** 3).toFixed(0)} GB`, `Browser-available storage about ${((e.quota - e.usage) / 1024 ** 3).toFixed(0)} GB`); } catch { return L('स्टोरेज माहिती उपलब्ध नाही', 'Storage info unavailable'); } };
+    const sys = () => L(`CPU कोर्स ${navigator.hardwareConcurrency || '?'}, प्लॅटफॉर्म ${navigator.platform || 'Web'}${navigator.deviceMemory ? ', RAM सुमारे ' + navigator.deviceMemory + ' GB' : ''}, नेटवर्क ${navigator.onLine ? 'ऑनलाइन' : 'ऑफलाइन'}`,
+      `CPU cores ${navigator.hardwareConcurrency || '?'}, platform ${navigator.platform || 'Web'}${navigator.deviceMemory ? ', RAM about ' + navigator.deviceMemory + ' GB' : ''}, network ${navigator.onLine ? 'online' : 'offline'}`);
     if (hasAny(q, ['system status', 'system info', 'सिस्टम स्थिती', 'laptop status', 'लॅपटॉप कसा आहे', 'battery status'])) return [await bat(), sys(), await disk()].join('. ') + '.';
-    if (hasAny(q, ['बॅटरी', 'battery', 'चार्जिंग'])) return (await bat()) + '.';
-    if (hasAny(q, ['cpu', 'सीपीयू', 'प्रोसेसर', 'रॅम', 'मेमरी'])) return sys() + '.';
-    if (hasAny(q, ['disk', 'डिस्क', 'स्टोरेज', 'storage'])) return (await disk()) + '.';
+    if (hasAny(q, ['बॅटरी', 'battery', 'चार्जिंग']) && c.words.length <= 4) return (await bat()) + '.';
+    if (c.words.length <= 4 && hasAny(q, ['cpu', 'सीपीयू', 'प्रोसेसर', 'रॅम', 'मेमरी'])) return sys() + '.';
+    if (c.words.length <= 4 && hasAny(q, ['disk', 'डिस्क', 'स्टोरेज', 'storage'])) return (await disk()) + '.';
     return null;
   },
-  async c => { // weather
+  async c => { // weather (never auto-opens any tab)
     if (!c.short || !hasAny(c.q, ['हवामान', 'weather', 'तापमान', 'temperature', 'havaman', 'mausam'])) return null;
     const tomorrow = hasAny(c.q, ['उद्या', 'tomorrow']), city = removeWords(c.query, WEATHER_FILLER);
     try { return await getWeather(city, tomorrow); }
-    catch (e) { console.warn(e); openUrl('https://www.google.com/search?q=' + encodeURIComponent(`weather ${city}`.trim())); return 'हवामान माहिती थेट मिळाली नाही, म्हणून Google वर उघडत आहे.'; }
+    catch (e) { console.warn(e); return L('हवामान माहिती आत्ता मिळाली नाही. पुन्हा प्रयत्न करा, किंवा "google weather ' + (city || 'Pune') + '" म्हणा.', 'Could not fetch the weather right now. Try again, or say "google weather ' + (city || 'Pune') + '".'); }
   },
   c => { // fun
     const q = c.q;
-    if (c.short && hasAny(q, ['विनोद', 'joke', 'जोक', 'हसव', 'vinod'])) return JOKES[Math.floor(Math.random() * JOKES.length)];
-    if (c.short && hasAny(q, ['नाणे', 'नाणं', 'coin', 'toss', 'टॉस', 'छापा काटा'])) return Math.random() < .5 ? 'छापा पडला!' : 'काटा पडला!';
-    if (c.short && hasAny(q, ['फासा', 'dice', 'डाइस'])) return `फासा टाकला, ${1 + Math.floor(Math.random() * 6)} आला.`;
-    if (hasAny(q, ['random number', 'रँडम नंबर', 'यादृच्छिक'])) { const n = (toAscii(q).match(/\d+/g) || []).map(Number); const [lo, hi] = n.length >= 2 ? [Math.min(n[0], n[1]), Math.max(n[0], n[1])] : [1, 100]; return `तुमचा नंबर ${lo + Math.floor(Math.random() * (hi - lo + 1))}.`; }
+    if (c.short && hasAny(q, ['विनोद', 'joke', 'जोक', 'हसव', 'vinod'])) { const J = LANG === 'en' ? JOKES_EN : JOKES_MR; return J[Math.floor(Math.random() * J.length)]; }
+    if (c.short && hasAny(q, ['नाणे', 'नाणं', 'coin', 'toss', 'टॉस', 'छापा काटा'])) return Math.random() < .5 ? L('छापा पडला!', 'Heads!') : L('काटा पडला!', 'Tails!');
+    if (c.short && hasAny(q, ['फासा', 'dice', 'डाइस'])) { const n = 1 + Math.floor(Math.random() * 6); return L(`फासा टाकला, ${n} आला.`, `Rolled the dice: ${n}.`); }
+    if (hasAny(q, ['random number', 'रँडम नंबर', 'यादृच्छिक'])) { const n = (toAscii(q).match(/\d+/g) || []).map(Number); const [lo, hi] = n.length >= 2 ? [Math.min(n[0], n[1]), Math.max(n[0], n[1])] : [1, 100]; const r = lo + Math.floor(Math.random() * (hi - lo + 1)); return L(`तुमचा नंबर ${r}.`, `Your number is ${r}.`); }
     return null;
   },
+  /* ---- everything below OPENS a new tab, so it needs a clear request ---- */
   c => { // youtube
-    if (!hasAny(c.q, ['youtube', 'युट्यूब'])) return null;
+    if (!hasAny(c.q, ['youtube', 'युट्यूब']) || !(c.intent || c.words.length === 1)) return null;
     const term = extractTerm(c.q);
-    if (term) { openUrl('https://www.youtube.com/results?search_query=' + encodeURIComponent(term)); return `YouTube वर ${term} शोधत आहे.`; }
-    openUrl('https://www.youtube.com'); return 'YouTube उघडत आहे.';
+    if (term) { openUrl('https://www.youtube.com/results?search_query=' + encodeURIComponent(term)); return L(`YouTube वर ${term} शोधत आहे.`, `Searching YouTube for ${term}.`); }
+    openUrl('https://www.youtube.com'); return L('YouTube उघडत आहे.', 'Opening YouTube.');
   },
   c => { // music
     const q = c.q; if (q.includes('play store') || c.words.length > 8) return null;
-    if (hasAny(q, ['गाणे', 'गाणं', 'गाणी', 'song', 'songs', 'music', 'संगीत']) || q.startsWith('play ')) {
+    const playWord = hasAny(q, ['play', 'लाव', 'लावा', 'वाजव', 'वाजवा', 'ऐकव', 'ऐकवा']);
+    if ((hasAny(q, ['गाणे', 'गाणं', 'गाणी', 'song', 'songs', 'music', 'संगीत']) && playWord) || q.startsWith('play ')) {
       const term = extractTerm(q, MUSIC_FILLER);
-      if (term) { openUrl('https://www.youtube.com/results?search_query=' + encodeURIComponent(term + ' song')); return `${term} हे गाणे YouTube वर शोधत आहे.`; }
-      openUrl('https://music.youtube.com'); return 'YouTube Music उघडत आहे.';
+      if (term) { openUrl('https://www.youtube.com/results?search_query=' + encodeURIComponent(term + ' song')); return L(`${term} हे गाणे YouTube वर शोधत आहे.`, `Searching YouTube for the song ${term}.`); }
+      openUrl('https://music.youtube.com'); return L('YouTube Music उघडत आहे.', 'Opening YouTube Music.');
     }
     return null;
   },
   c => { // maps
-    const q = c.q; if (!c.short || !hasAny(q, ['map', 'maps', 'नकाशा', 'navigate', 'directions', 'near me', 'nearby'])) return null;
+    const q = c.q; if (!c.short || !c.intent || !hasAny(q, ['map', 'maps', 'नकाशा', 'navigate', 'directions', 'near me', 'nearby'])) return null;
     const term = extractTerm(q, MAP_FILLER);
-    if (!term) { openUrl('https://www.google.com/maps'); return 'Google Maps उघडत आहे.'; }
-    if (hasAny(q, ['directions', 'navigate'])) { openUrl('https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(term)); return `${term} साठी मार्ग उघडत आहे.`; }
-    openUrl('https://www.google.com/maps/search/' + encodeURIComponent(term)); return `नकाशावर ${term} शोधत आहे.`;
+    if (!term) { openUrl('https://www.google.com/maps'); return L('Google Maps उघडत आहे.', 'Opening Google Maps.'); }
+    if (hasAny(q, ['directions', 'navigate'])) { openUrl('https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(term)); return L(`${term} साठी मार्ग उघडत आहे.`, `Opening directions to ${term}.`); }
+    openUrl('https://www.google.com/maps/search/' + encodeURIComponent(term)); return L(`नकाशावर ${term} शोधत आहे.`, `Searching the map for ${term}.`);
   },
   c => { // news + wikipedia
     const q = c.q;
-    if (c.short && hasAny(q, ['बातम्या', 'news'])) {
+    if (c.short && hasAny(q, ['बातम्या', 'news']) && (c.intent || c.words.length <= 3)) {
       const term = extractTerm(q, NEWS_FILLER);
-      if (term) { openUrl(`https://news.google.com/search?q=${encodeURIComponent(term)}&hl=mr&gl=IN&ceid=IN:mr`); return `${term} बद्दलच्या बातम्या उघडत आहे.`; }
-      openUrl('https://news.google.com/?hl=mr&gl=IN&ceid=IN:mr'); return 'ताज्या बातम्या उघडत आहे.';
+      if (term) { openUrl(`https://news.google.com/search?q=${encodeURIComponent(term)}&hl=${LANG === 'en' ? 'en-IN' : 'mr'}&gl=IN&ceid=IN:${LANG === 'en' ? 'en' : 'mr'}`); return L(`${term} बद्दलच्या बातम्या उघडत आहे.`, `Opening news about ${term}.`); }
+      openUrl(`https://news.google.com/?hl=${LANG === 'en' ? 'en-IN' : 'mr'}&gl=IN&ceid=IN:${LANG === 'en' ? 'en' : 'mr'}`); return L('ताज्या बातम्या उघडत आहे.', 'Opening the latest news.');
     }
-    if (hasAny(q, ['wikipedia', 'विकिपीडिया'])) {
+    if (hasAny(q, ['wikipedia', 'विकिपीडिया']) && (c.intent || /^(wikipedia|विकिपीडिया)\b/.test(q))) {
       const term = extractTerm(q, WIKI_FILLER), host = new RegExp(`[${DEV}]`).test(term) ? 'mr.wikipedia.org' : 'en.wikipedia.org';
-      if (term) { openUrl(`https://${host}/w/index.php?search=${encodeURIComponent(term)}`); return `Wikipedia वर ${term} शोधत आहे.`; }
-      openUrl('https://www.wikipedia.org'); return 'Wikipedia उघडत आहे.';
+      if (term) { openUrl(`https://${host}/w/index.php?search=${encodeURIComponent(term)}`); return L(`Wikipedia वर ${term} शोधत आहे.`, `Searching Wikipedia for ${term}.`); }
+      openUrl('https://www.wikipedia.org'); return L('Wikipedia उघडत आहे.', 'Opening Wikipedia.');
     }
     return null;
   },
   c => { // sites
     if (!c.wantsOpen) return null;
-    for (const [label, url, names] of SITES) if (hasAny(c.q, names)) { openUrl(url); return `${label} उघडत आहे.`; }
+    for (const [label, url, names] of SITES) if (hasAny(c.q, names)) { openUrl(url); return L(`${label} उघडत आहे.`, `Opening ${label}.`); }
     return null;
   },
-  c => (c.explicitOpen || c.words.length === 1) && hasAny(c.q, DESKTOP_ONLY_APPS) ? 'हे लॅपटॉप अॅप ब्राउझरमधून उघडता येत नाही; ते Python ZARA आवृत्तीत चालते.' : null,
+  c => (c.explicitOpen || c.words.length === 1) && hasAny(c.q, DESKTOP_ONLY_APPS) ? L('हे लॅपटॉप अॅप ब्राउझरमधून उघडता येत नाही; ते Python ZARA आवृत्तीत चालते.', 'That is a desktop app and cannot be opened from a browser; it works in the Python ZARA app.') : null,
   c => { // generic "open X"
-    if (!c.explicitOpen || c.words.length > 4) return null;
+    if (!(/^(open|launch)\s+/.test(c.q) || /\s(उघड|उघडा|ughad|khol)\s*$/.test(c.q)) || c.words.length > 4) return null;
     const term = extractTerm(c.q, new Set(['website', 'वेबसाइट', 'site', 'app', 'ॲप', 'अॅप'])).trim();
     if (!term) return null;
-    if (/^[a-z0-9.\-]+\.[a-z]{2,}$/i.test(term)) { openUrl('https://' + term); return `${term} उघडत आहे.`; }
-    openUrl('https://www.google.com/search?q=' + encodeURIComponent(term)); return `${term} Google वर शोधत आहे.`;
+    if (/^[a-z0-9.\-]+\.[a-z]{2,}$/i.test(term)) { openUrl('https://' + term); return L(`${term} उघडत आहे.`, `Opening ${term}.`); }
+    openUrl('https://www.google.com/search?q=' + encodeURIComponent(term)); return L(`${term} Google वर शोधत आहे.`, `Searching Google for ${term}.`);
   },
-  c => { // google
-    if (c.words.length > 7 || !hasAny(c.q, ['google', 'गुगल', 'सर्च', 'search'])) return null;
-    const term = extractTerm(c.q);
-    if (term) { openUrl('https://www.google.com/search?q=' + encodeURIComponent(term)); return `Google वर ${term} शोधत आहे.`; }
-    openUrl('https://www.google.com'); return 'Google उघडत आहे.';
+  c => { // google search (only on explicit request)
+    if (c.words.length > 10) return null;
+    const q = c.q;
+    const asked = /^(search|google|सर्च|गुगल)\b/.test(q) || /(सर्च|search)\s*(कर|करा|kar)?\s*$/.test(q) || (c.intent && hasAny(q, ['google', 'गुगल']));
+    if (!asked) return null;
+    const term = extractTerm(q);
+    if (term) { openUrl('https://www.google.com/search?q=' + encodeURIComponent(term)); return L(`Google वर ${term} शोधत आहे.`, `Searching Google for ${term}.`); }
+    openUrl('https://www.google.com'); return L('Google उघडत आहे.', 'Opening Google.');
   }
 ];
 async function runFast(query) {
@@ -938,8 +981,9 @@ async function runFast(query) {
 async function handleUserCommand(raw) {
   let text = (raw || '').trim(); if (!text) return;
   const w = stripWake(text); if (w.has && w.rest) text = w.rest;
-  if (busy) { showToast('थांबा, मागचे काम सुरू आहे...'); return; }
+  if (busy) { showToast('Please wait, still working • थांबा'); return; }
   busy = true; $('send-btn').disabled = true;
+  LANG = detectLang(text);
   appendMessage('user', text); beep('send'); setOrb('thinking'); liveText(text);
   let typing = null;
   try {
@@ -966,16 +1010,6 @@ else $('sys-battery').textContent = 'N/A';
 addEventListener('online', () => $('sys-network').textContent = 'ONLINE');
 addEventListener('offline', () => $('sys-network').textContent = 'OFFLINE');
 
-const CHIPS = [
-  ['brain', 'text-cyan-400', 'AI म्हणजे काय?'], ['code', 'text-pink-400', 'एक सुंदर HTML पोर्टफोलिओ पेज बनव'], ['bot', 'text-amber-400', 'Open Claude AI'],
-  ['clock', 'text-cyan-400', 'वेळ काय झाली?'], ['calendar', 'text-pink-400', 'आजची तारीख'], ['timer', 'text-emerald-400', 'पाच मिनिटांचा टायमर'],
-  ['cloud-sun', 'text-amber-300', 'Pune हवामान'], ['youtube', 'text-rose-500', 'Open YouTube'], ['smile', 'text-emerald-400', 'एक विनोद सांग'], ['cpu', 'text-violet-400', 'System info']
-];
-$('chips').innerHTML = '<span class="text-[10px] font-mono text-slate-500 uppercase shrink-0">Quick:</span>' + CHIPS.map(([ic, col, cmd]) =>
-  `<button data-cmd="${escapeHtml(cmd)}" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5"><i data-lucide="${ic}" class="w-3 h-3 ${col}"></i> ${escapeHtml(cmd)}</button>`).join('');
-lucide.createIcons();
-document.querySelectorAll('.quick-chip').forEach(ch => ch.addEventListener('click', () => handleUserCommand(ch.dataset.cmd)));
-
 $('chat-form').addEventListener('submit', e => { e.preventDefault(); const v = $('user-input').value.trim(); if (!v) return; $('user-input').value = ''; handleUserCommand(v); });
 $('orb-trigger-btn').addEventListener('click', toggleOnceListening);
 $('mic-input-btn').addEventListener('click', toggleOnceListening);
@@ -983,20 +1017,20 @@ $('stop-speaking-btn').addEventListener('click', stopSpeaking);
 $('clear-chat-top-btn').addEventListener('click', () => { chatMessages.innerHTML = ''; });
 $('wake-switch').addEventListener('change', e => {
   wakeMode = e.target.checked;
-  if (wakeMode) { startRec('wake'); appendMessage('ai', 'Auto Wake सुरू: "हे झारा" म्हणून हाक मारा. (ब्राउझर टॅब उघडा ठेवा.)'); }
-  else { stopRec(); appendMessage('ai', 'Auto Wake बंद केला.'); setOrb('idle'); }
+  if (wakeMode) { startRec('wake'); appendMessage('ai', 'Auto Wake ON: say "Hey Zara" / "हे झारा". (Keep this tab open.)'); }
+  else { stopRec(); appendMessage('ai', 'Auto Wake OFF.'); setOrb('idle'); }
 });
 $('tts-toggle-btn').addEventListener('click', () => {
-  settings.tts = !settings.tts; saveSettings(); if (!settings.tts) stopSpeaking(); syncToggles(); showToast(settings.tts ? 'Voice सुरू' : 'Voice बंद');
+  settings.tts = !settings.tts; saveSettings(); if (!settings.tts) stopSpeaking(); syncToggles(); showToast(settings.tts ? 'Voice ON' : 'Voice OFF');
 });
-$('sfx-toggle-btn').addEventListener('click', () => { settings.sfx = !settings.sfx; saveSettings(); syncToggles(); showToast(settings.sfx ? 'Sounds सुरू' : 'Sounds बंद'); });
+$('sfx-toggle-btn').addEventListener('click', () => { settings.sfx = !settings.sfx; saveSettings(); syncToggles(); showToast(settings.sfx ? 'Sounds ON' : 'Sounds OFF'); });
 function syncToggles() {
   $('tts-label').textContent = settings.tts ? 'Voice: ON' : 'Voice: OFF';
   $('tts-icon').setAttribute('data-lucide', settings.tts ? 'volume-2' : 'volume-x');
   $('sfx-icon').setAttribute('data-lucide', settings.sfx ? 'bell-ring' : 'bell-off');
   lucide.createIcons();
 }
-function syncEngine() { const b = $('engine-badge'); b.textContent = settings.apiKey ? 'GEMINI LIVE' : 'FREE AI'; }
+function syncEngine() { $('engine-badge').textContent = settings.apiKey ? 'GEMINI LIVE' : 'FREE AI'; }
 
 const showModal = (id, on) => { $(id).classList.toggle('hidden', !on); $(id).classList.toggle('flex', on); };
 $('help-btn').addEventListener('click', () => showModal('help-modal', true));
@@ -1014,14 +1048,15 @@ $('save-settings-btn').addEventListener('click', () => {
   settings.name = $('set-name').value.trim().slice(0, 30); settings.apiKey = $('set-key').value.trim();
   settings.models = $('set-models').value.trim() || 'gemini-2.5-flash'; settings.recLang = $('set-reclang').value;
   settings.gender = $('set-gender').value; settings.rate = parseFloat($('set-rate').value);
-  saveSettings(); syncEngine(); setOrb(state.orb); showModal('settings-modal', false); showToast('Settings सेव्ह झाल्या');
+  saveSettings(); syncEngine(); setOrb(state.orb); showModal('settings-modal', false); showToast('Settings saved • सेव्ह झाल्या');
 });
-$('forget-btn').addEventListener('click', () => { history = []; store.set('zara_history', []); showToast('आठवण पुसली'); });
+$('forget-btn').addEventListener('click', () => { history = []; store.set('zara_history', []); showToast('Memory cleared • आठवण पुसली'); });
 
 /* ============================ Boot ============================ */
 addEventListener('DOMContentLoaded', () => {
   resizeCanvas(); animateOrb(); syncToggles(); syncEngine(); setOrb('idle');
-  appendMessage('ai', `नमस्कार **${settings.name || 'मित्रा'}**! मी ZARA (Cutie Smart AI) आहे. मला **काहीही** विचारा, मी इथेच उत्तर देईन.\n\nटीप: Settings (⚙) मध्ये Gemini API key टाकल्यास उत्तरे जास्त वेगवान आणि विश्वासार्ह येतील; key नसेल तर Free AI वापरला जातो.`);
+  const n = settings.name ? ` **${settings.name}**` : '';
+  appendMessage('ai', `नमस्कार${n}! मी ZARA (Cutie Smart AI) आहे. मला **काहीही** विचारा, मी तुमच्या भाषेत (मराठी / English) इथेच उत्तर देईन.\n\nHello${n}! I'm ZARA. Ask me **anything** and I'll answer right here in the language you use.\n\nTip: add a free Gemini API key in Settings (⚙) for faster, more reliable answers. • Settings (⚙) मध्ये Gemini API key टाका.`);
 });
 </script>
 </body>
