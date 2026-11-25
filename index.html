@@ -483,6 +483,7 @@ function systemPrompt() {
     'वापरकर्ता ज्या भाषेत लिहितो (मराठी, इंग्रजी अक्षरांत लिहिलेली मराठी/हिंग्लिश, हिंदी किंवा English) त्याच भाषेत आणि शैलीत उत्तर दे. ' +
     'उत्तर स्पष्ट, अचूक आणि थोडक्यात (साधारण 2-5 वाक्ये) ठेव; वापरकर्त्याने सविस्तर मागितले तर सविस्तर दे. ' +
     'कोड किंवा HTML मागितला तर पूर्ण, थेट चालणारा कोड एकाच ``` fence मध्ये दे (HTML असल्यास CSS आणि JS inline, एकाच फाइलमध्ये) आणि बाहेर फक्त एक छोटे वाक्य लिही. ' +
+    'वेबसाइट, पेज किंवा अॅप बनवायला सांगितले आणि तपशील दिला नसेल, तर प्रश्न न विचारता एक सुंदर, पूर्ण उदाहरण बनवून दे. ' +
     'तू ब्राउझरमधील चॅट असिस्टंट आहेस; लॅपटॉपवर किंवा फाइल्सवर प्रत्यक्ष कृती केल्याचे खोटे सांगू नकोस.';
 }
 const fetchT = (url, opts = {}, ms = 30000) => fetch(url, { ...opts, signal: AbortSignal.timeout(ms) });
@@ -517,27 +518,41 @@ async function callGemini(question, maxTok) {
   throw lastErr;
 }
 async function callFreeAI(question, maxTok) {
+  for (const model of ['openai', 'mistral', 'openai']) {
+    const t = await callFreeAIOnce(question, maxTok, model);
+    if (t) return t;
+    await new Promise(r => setTimeout(r, 700));
+  }
+  return null;
+}
+async function callFreeAIOnce(question, maxTok, model) {
   const sys = systemPrompt();
   try {
     const r = await fetchT('https://text.pollinations.ai/openai', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'openai', max_tokens: maxTok, messages: [{ role: 'system', content: sys }, ...history.map(h => ({ role: h.role === 'model' ? 'assistant' : 'user', content: h.text })), { role: 'user', content: question }] })
+      body: JSON.stringify({ model, max_tokens: maxTok, messages: [{ role: 'system', content: sys }, ...history.map(h => ({ role: h.role === 'model' ? 'assistant' : 'user', content: h.text })), { role: 'user', content: question }] })
     }, 40000);
     if (r.ok) { const d = await r.json(); const t = d.choices?.[0]?.message?.content?.trim(); if (t) return t; }
   } catch {}
   try {
-    const r = await fetchT(`https://text.pollinations.ai/${encodeURIComponent(question)}?system=${encodeURIComponent(sys)}&model=openai`, {}, 40000);
+    const r = await fetchT(`https://text.pollinations.ai/${encodeURIComponent(question)}?system=${encodeURIComponent(sys)}&model=${model}`, {}, 40000);
     if (r.ok) { const t = (await r.text()).trim(); if (t) return t; }
   } catch {}
   return null;
 }
 async function wikiAnswer(question) {
+  const isLookup = /^\s*(what is|what are|who is|who was|define|tell me about)\b|म्हणजे काय|कोण आहे|कोण होते|काय आहे/i.test(question);
+  if (!isLookup) return null;
   const term = question.replace(/^(what is|what are|who is|define|explain|म्हणजे काय|काय आहे)\s*/i, '').replace(/(म्हणजे काय|काय आहे|कोण आहे|बद्दल सांग)[?.!]*$/i, '').replace(/[?.,!]/g, '').trim() || question;
   const host = /[\u0900-\u097F]/.test(term) ? 'mr' : 'en';
   try {
     const r = await fetchT(`https://${host}.wikipedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=${encodeURIComponent(term)}&gsrlimit=1&prop=extracts&exintro=1&explaintext=1&exsentences=3`, {}, 15000);
     const d = await r.json(); const pages = d.query?.pages;
-    if (pages) { const p = Object.values(pages)[0]; if (p?.extract) return `**${p.title}:** ${p.extract.trim()}`; }
+    if (pages) {
+      const p = Object.values(pages)[0], ex = (p?.extract || '').trim();
+      if (ex && !/may (also )?refer to|:\s*$/i.test(ex) && ex.length > 40)
+        return `**${p.title}** (Wikipedia वरून — AI सेवा सध्या चालत नाही):\n${ex}`;
+    }
   } catch {}
   return null;
 }
@@ -549,14 +564,16 @@ async function askAI(question) {
     catch (e) { if (e.auth) throw e; console.warn('Gemini अयशस्वी, Free AI वापरत आहे:', e); }
   }
   let t = await callFreeAI(question, maxTok);
-  if (!t) t = await wikiAnswer(question);
   if (t) { remember(question, t); return t; }
-  throw new Error('network: कोणत्याही AI सेवेकडून उत्तर मिळाले नाही');
+  if (!wantsCode) { const w = await wikiAnswer(question); if (w) return w; }
+  const e = new Error('freeai: Free AI सेवा उत्तर देत नाही');
+  e.freeai = true; throw e;
 }
 function friendlyError(e) {
   const m = String(e && e.message || e), low = m.toLowerCase();
   console.error(e);
   if (e.auth || /api key|permission_denied|unauthenticated/.test(low)) return 'Gemini API key चुकीची किंवा बंद दिसते. Settings (⚙) मध्ये तपासा किंवा key रिकामी ठेवून Free AI वापरा.';
+  if (e.freeai) return 'Free AI सेवा सध्या उत्तर देत नाही (ती मोफत असल्याने वारंवार बंद पडते). कायमचा उपाय: aistudio.google.com वरून मोफत Gemini API key घ्या आणि Settings (⚙) मध्ये टाका, मग प्रत्येक प्रश्नाचे आणि कोडचे उत्तर नीट येईल.';
   if (/429|quota|resource_exhausted/.test(low)) return 'API ची मर्यादा संपली आहे, थोड्या वेळाने प्रयत्न करा.';
   if (/503|unavailable/.test(low)) return 'सर्व्हरवर जास्त लोड आहे, थोड्या वेळाने पुन्हा प्रयत्न करा.';
   if (/network|failed to fetch|timeout|abort/.test(low)) return 'इंटरनेट/सर्व्हर कनेक्शनची अडचण दिसते. कनेक्शन तपासा; Settings मध्ये Gemini key टाकल्यास जास्त विश्वासार्ह चालेल.';
