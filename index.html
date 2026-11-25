@@ -554,19 +554,27 @@ async function wikiAnswer(question) {
   } catch {}
   return null;
 }
+let lastGeminiError = '';
 async function askAI(question) {
+  lastGeminiError = '';
   const wantsCode = /\b(html|css|javascript|python|code|script|website|dashboard|page|program)\b|कोड|स्क्रिप्ट|वेबसाइट|डॅशबोर्ड|पेज|प्रोग्राम|banav|बनव|तयार कर/i.test(question);
   const maxTok = wantsCode ? 8192 : 1024;
   if (settings.apiKey) {
     try { const t = await callGemini(question, maxTok); remember(question, t); return t; }
-    catch (e) { if (e.auth) throw e; console.warn('Gemini failed, using Free AI:', e); }
+    catch (e) { if (e.auth) throw e; lastGeminiError = String(e.message || e); showToast('Gemini: ' + lastGeminiError.slice(0, 140)); console.warn('Gemini failed, using Free AI:', e); }
   }
   let t = await callFreeAI(question, maxTok);
   if (t) { remember(question, t); return t; }
   if (!wantsCode) { const w = await wikiAnswer(question); if (w) return w; }
-  const e = new Error('freeai'); e.freeai = true; throw e;
+  const e = new Error('freeai'); e.freeai = true; e.detail = settings.apiKey ? lastGeminiError : ''; throw e;
 }
 function friendlyError(e) {
+  let msg = friendlyError0(e);
+  if (e && e.detail) msg += '\n\nGemini error: ' + e.detail;
+  if (e && e.auth) msg += '\n\nDetail: ' + String(e.message).slice(0, 300);
+  return msg;
+}
+function friendlyError0(e) {
   const m = String(e && e.message || e), low = m.toLowerCase();
   console.error(e);
   if (e.freeai) return L('Free AI सेवा सध्या उत्तर देत नाही (ती मोफत असल्याने वारंवार बंद पडते). कायमचा उपाय: aistudio.google.com वरून मोफत Gemini API key घ्या आणि Settings (⚙) मध्ये टाका.',
