@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cutie Smart AI — Personal Futuristic Assistant</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono & Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Tone.js for subtle futuristic UI audio feedback -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#050811',
+                            panel: '#0b1120',
+                            border: '#1e293b',
+                            cyan: '#06b6d4',
+                            pink: '#ec4899',
+                            violet: '#8b5cf6',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 18s linear infinite',
+                        'spin-reverse': 'spin 24s linear infinite reverse',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for sleek cyberpunk aesthetic */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(11, 17, 32, 0.4);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(6, 182, 212, 0.35);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(6, 182, 212, 0.65);
+        }
+
+        /* Subtle futuristic background grid */
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(6, 182, 212, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(6, 182, 212, 0.04) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism panel */
+        .glass-panel {
+            background: rgba(11, 17, 32, 0.72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        /* Orb glow effects */
+        .orb-glow-idle {
+            box-shadow: 0 0 60px rgba(6, 182, 212, 0.25), inset 0 0 30px rgba(236, 72, 153, 0.2);
+        }
+        .orb-glow-listening {
+            box-shadow: 0 0 85px rgba(236, 72, 153, 0.55), inset 0 0 40px rgba(6, 182, 212, 0.45);
+        }
+        .orb-glow-speaking {
+            box-shadow: 0 0 90px rgba(139, 92, 246, 0.6), inset 0 0 45px rgba(6, 182, 212, 0.55);
+        }
+    </style>
+</head>
+<body class="bg-cyber-bg text-slate-100 min-h-screen flex flex-col cyber-grid selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden">
+
+    <!-- Top Futuristic HUD Header -->
+    <header class="glass-panel sticky top-0 z-30 border-b border-cyan-500/20 px-4 sm:px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500/20 to-pink-500/20 border border-cyan-400/40 shadow-lg shadow-cyan-500/10">
+                <i data-lucide="sparkles" class="w-5 h-5 text-cyan-400"></i>
+                <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="font-display font-bold text-base sm:text-lg tracking-wider bg-gradient-to-r from-cyan-300 via-white to-pink-400 bg-clip-text text-transparent">
+                        CUTIE SMART AI
+                    </h1>
+                    <span class="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+                        v2.5 NEURAL CORE
+                    </span>
+                </div>
+                <p class="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+                    <span id="status-dot" class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                    <span id="header-status-text">ONLINE • READY FOR COMMANDS</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Controls: Live Clock, Sound/Voice Output Toggle, Help -->
+        <div class="flex items-center gap-2 sm:gap-3">
+            <!-- Live HUD Clock -->
+            <div class="hidden md:flex flex-col items-end mr-2 font-mono text-xs">
+                <span id="hud-time" class="text-cyan-300 font-semibold">00:00:00</span>
+                <span id="hud-date" class="text-[10px] text-slate-400">LOADING DATE...</span>
+            </div>
+
+            <!-- Voice Output (TTS) Toggle -->
+            <button id="tts-toggle-btn" title="Toggle Voice Response (Text-to-Speech)"
+                class="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/30 text-xs font-medium text-cyan-300 transition-all active:scale-95">
+                <i id="tts-icon" data-lucide="volume-2" class="w-4 h-4 text-cyan-400"></i>
+                <span class="hidden sm:inline" id="tts-label">Voice: ON</span>
+            </button>
+
+            <!-- UI Sound Effects Toggle -->
+            <button id="sfx-toggle-btn" title="Toggle UI Sound Effects"
+                class="p-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-slate-300 hover:text-pink-400 transition-all active:scale-95">
+                <i id="sfx-icon" data-lucide="bell-ring" class="w-4 h-4"></i>
+            </button>
+
+            <!-- Commands Guide Modal Trigger -->
+            <button id="help-btn" title="View Supported Commands"
+                class="p-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-slate-300 hover:text-cyan-400 transition-all active:scale-95">
+                <i data-lucide="terminal" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Layout -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+
+        <!-- Left Column: AI Core Visualizer & Telemetry (5 cols on lg) -->
+        <section class="lg:col-span-5 flex flex-col gap-4">
+            <!-- Core Orb Visualizer Card -->
+            <div class="glass-panel rounded-3xl p-5 sm:p-6 flex flex-col items-center justify-between relative overflow-hidden flex-1 min-h-[340px]">
+                <!-- Ambient radial glow -->
+                <div id="orb-ambient-bg" class="absolute inset-0 bg-radial from-cyan-500/10 via-transparent to-transparent pointer-events-none transition-opacity duration-500"></div>
+
+                <!-- Top Telemetry Strip -->
+                <div class="w-full flex items-center justify-between text-[11px] font-mono text-slate-400 z-10">
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
+                        CORE: <strong class="text-slate-200" id="core-mode-label">STANDBY</strong>
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-slate-900/80 border border-slate-800 text-pink-400" id="lang-badge">
+                        EN-IN / HI-MIX
+                    </span>
+                </div>
+
+                <!-- Interactive Glowing AI Orb Canvas -->
+                <div class="relative my-4 flex items-center justify-center w-56 h-56 sm:w-64 sm:h-64">
+                    <!-- Outer Decorative HUD Rings -->
+                    <div class="absolute inset-0 rounded-full border border-dashed border-cyan-500/30 animate-spin-slow pointer-events-none"></div>
+                    <div class="absolute inset-3 rounded-full border border-dotted border-pink-500/30 animate-spin-reverse pointer-events-none"></div>
+                    
+                    <!-- Interactive Canvas Visualizer -->
+                    <button id="orb-trigger-btn" aria-label="Activate Voice Listening"
+                        class="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 orb-glow-idle hover:scale-105 active:scale-95 focus:outline-none group">
+                        <canvas id="ai-orb-canvas" class="w-full h-full rounded-full"></canvas>
+                        <!-- Center Mic Overlay Icon -->
+                        <div id="orb-center-badge" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                            <div class="w-12 h-12 rounded-full bg-slate-950/60 backdrop-blur-md border border-white/15 flex items-center justify-center shadow-inner group-hover:border-cyan-400/50 transition-colors">
+                                <i id="orb-mic-icon" data-lucide="mic" class="w-5 h-5 text-cyan-300 transition-transform group-hover:scale-110"></i>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Live Speech Recognition Transcript / Status Pill -->
+                <div class="w-full z-10 flex flex-col items-center text-center gap-2">
+                    <div id="live-transcript-box" class="w-full px-4 py-2.5 rounded-2xl bg-slate-950/75 border border-slate-800/90 text-xs sm:text-sm font-mono text-cyan-200 min-h-[42px] flex items-center justify-center">
+                        <span id="live-transcript-text" class="truncate">Tap the orb or mic below to speak...</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400">
+                        Try saying: <span class="text-cyan-300">"What time is it?"</span>, <span class="text-pink-300">"Open YouTube"</span>, or <span class="text-violet-300">"Tell me a joke"</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- System Diagnostics Mini Cards -->
+            <div class="grid grid-cols-3 gap-2.5">
+                <div class="glass-panel rounded-2xl p-3 flex flex-col justify-between">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase flex items-center gap-1">
+                        <i data-lucide="activity" class="w-3 h-3 text-emerald-400"></i> Neural Sync
+                    </span>
+                    <span class="text-sm sm:text-base font-display font-bold text-emerald-400 mt-1">99.8%</span>
+                </div>
+                <div class="glass-panel rounded-2xl p-3 flex flex-col justify-between">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase flex items-center gap-1">
+                        <i data-lucide="battery-charging" class="w-3 h-3 text-cyan-400"></i> Power
+                    </span>
+                    <span id="sys-battery" class="text-sm sm:text-base font-display font-bold text-cyan-300 mt-1">100%</span>
+                </div>
+                <div class="glass-panel rounded-2xl p-3 flex flex-col justify-between">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase flex items-center gap-1">
+                        <i data-lucide="wifi" class="w-3 h-3 text-pink-400"></i> Uplink
+                    </span>
+                    <span id="sys-network" class="text-sm sm:text-base font-display font-bold text-pink-400 mt-1">ONLINE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Column: Conversational Interface & Quick Action Chips (7 cols on lg) -->
+        <section class="lg:col-span-7 glass-panel rounded-3xl flex flex-col overflow-hidden h-[560px] lg:h-[630px]">
+            <!-- Chat Header Bar -->
+            <div class="px-5 py-3.5 border-b border-slate-800/80 flex items-center justify-between bg-slate-900/40">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+                    <h2 class="text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold">Neural Command Stream</h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="stop-speaking-btn" class="hidden items-center gap-1 px-2.5 py-1 rounded-lg bg-pink-500/20 hover:bg-pink-500/30 border border-pink-500/40 text-[11px] font-mono text-pink-300 transition">
+                        <i data-lucide="square" class="w-3 h-3 fill-current"></i> Stop Voice
+                    </button>
+                    <button id="clear-chat-top-btn" class="text-[11px] font-mono text-slate-400 hover:text-cyan-300 flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-slate-800/60 transition">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages Container -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 scroll-smooth">
+                <!-- Initial Greeting Message injected via JS -->
+            </div>
+
+            <!-- Quick Action Chips Bar -->
+            <div class="px-4 py-2.5 bg-slate-950/50 border-t border-slate-800/70">
+                <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+                    <span class="text-[10px] font-mono text-slate-500 uppercase shrink-0">Quick:</span>
+                    <button data-cmd="What time is it?" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
+                        <i data-lucide="clock" class="w-3 h-3 text-cyan-400"></i> Check Time
+                    </button>
+                    <button data-cmd="What is today's date?" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
+                        <i data-lucide="calendar" class="w-3 h-3 text-pink-400"></i> Date
+                    </button>
+                    <button data-cmd="Check weather info" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
+                        <i data-lucide="cloud-sun" class="w-3 h-3 text-amber-400"></i> Weather Info
+                    </button>
+                    <button data-cmd="Open YouTube" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
+                        <i data-lucide="youtube" class="w-3 h-3 text-rose-500"></i> Open YouTube
+                    </button>
+                    <button data-cmd="Open Google" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
+                        <i data-lucide="search" class="w-3 h-3 text-blue-400"></i> Open Google
+                    </button>
+                    <button data-cmd="Tell me a joke" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
+                        <i data-lucide="smile" class="w-3 h-3 text-emerald-400"></i> Tell a Joke
+                    </button>
+                    <button data-cmd="System info" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
+                        <i data-lucide="cpu" class="w-3 h-3 text-violet-400"></i> System Info
+                    </button>
+                    <button data-cmd="Clear chat" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-rose-950/60 border border-slate-700/80 hover:border-rose-500/50 text-xs text-slate-200 hover:text-rose-300 transition flex items-center gap-1.5">
+                        <i data-lucide="eraser" class="w-3 h-3 text-rose-400"></i> Clear Chat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <form id="chat-form" class="p-3 sm:p-4 bg-slate-900/90 border-t border-slate-800 flex items-center gap-2.5">
+                <button type="button" id="mic-input-btn" title="Voice Input"
+                    class="p-3 rounded-2xl bg-slate-800 hover:bg-pink-500/20 border border-slate-700 hover:border-pink-500/50 text-cyan-400 hover:text-pink-400 transition-all shrink-0 active:scale-95">
+                    <i id="mic-btn-icon" data-lucide="mic" class="w-5 h-5"></i>
+                </button>
+
+                <div class="relative flex-1">
+                    <input type="text" id="user-input" autocomplete="off"
+                        placeholder="Ask Cutie anything or type a command (e.g., 'Search quantum computing')..."
+                        class="w-full bg-slate-950/90 border border-slate-700/90 focus:border-cyan-400 rounded-2xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all">
+                </div>
+
+                <button type="submit" id="send-btn" title="Send Command"
+                    class="p-3 px-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-pink-500 hover:from-cyan-400 hover:to-pink-400 text-slate-950 font-semibold shadow-lg shadow-cyan-500/20 transition-all shrink-0 flex items-center gap-1.5 active:scale-95">
+                    <span class="hidden sm:inline text-sm">Send</span>
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Custom Toast / Notification Banner -->
+    <div id="toast-banner" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="glass-panel border-cyan-400/40 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-xs sm:text-sm text-cyan-100">
+            <i data-lucide="info" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+            <span id="toast-message">Notification</span>
+        </div>
+    </div>
+
+    <!-- Command Capabilities Modal -->
+    <div id="help-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="glass-panel border-cyan-500/30 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative animate-fade-in">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-pink-400"></i>
+                    <h3 class="font-display font-bold text-base text-white">CUTIE SMART AI — COMMAND MATRIX</h3>
+                </div>
+                <button id="close-help-btn" class="p-1.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="mt-4 space-y-3 text-xs sm:text-sm text-slate-300 max-h-[65vh] overflow-y-auto pr-1">
+                <p class="text-slate-400">You can speak using your microphone or type any of these smart commands:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
+                    <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="text-cyan-400 font-semibold block mb-1">🕒 Time & Date</span>
+                        "What time is it?"<br>"Tell me today's date"
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="text-pink-400 font-semibold block mb-1">🌐 Web & Search</span>
+                        "Open YouTube / Google"<br>"Search [anything]"
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="text-amber-400 font-semibold block mb-1">🌦️ Weather & News</span>
+                        "Check weather info"<br>"Weather in Pune"
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="text-emerald-400 font-semibold block mb-1">😄 Fun & Math</span>
+                        "Tell me a joke"<br>"Calculate 45 * 18"
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="text-violet-400 font-semibold block mb-1">💻 System Diagnostics</span>
+                        "System info"<br>"Battery status"
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="text-rose-400 font-semibold block mb-1">💬 Bilingual Chat</span>
+                        "Hello Cutie / Namaste"<br>"Clear chat"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * CUTIE SMART AI — WEB EDITION
+         * Personal Futuristic Voice & Chat Assistant
+         */
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // ==========================================
+        // 1. STATE MANAGEMENT & CONFIGURATION
+        // ==========================================
+        const state = {
+            isListening: false,
+            isSpeaking: false,
+            ttsEnabled: true,
+            sfxEnabled: true,
+            orbState: 'idle', // 'idle' | 'listening' | 'speaking' | 'thinking'
+            audioEnergy: 0,
+            batteryLevel: '100%',
+            batteryCharging: true
+        };
+
+        // DOM Elements
+        const chatMessages = document.getElementById('chat-messages');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const orbTriggerBtn = document.getElementById('orb-trigger-btn');
+        const micInputBtn = document.getElementById('mic-input-btn');
+        const micBtnIcon = document.getElementById('mic-btn-icon');
+        const orbMicIcon = document.getElementById('orb-mic-icon');
+        const liveTranscriptText = document.getElementById('live-transcript-text');
+        const coreModeLabel = document.getElementById('core-mode-label');
+        const headerStatusText = document.getElementById('header-status-text');
+        const statusDot = document.getElementById('status-dot');
+        const ttsToggleBtn = document.getElementById('tts-toggle-btn');
+        const ttsIcon = document.getElementById('tts-icon');
+        const ttsLabel = document.getElementById('tts-label');
+        const sfxToggleBtn = document.getElementById('sfx-toggle-btn');
+        const sfxIcon = document.getElementById('sfx-icon');
+        const stopSpeakingBtn = document.getElementById('stop-speaking-btn');
+        const clearChatTopBtn = document.getElementById('clear-chat-top-btn');
+        const helpBtn = document.getElementById('help-btn');
+        const helpModal = document.getElementById('help-modal');
+        const closeHelpBtn = document.getElementById('close-help-btn');
+
+        // ==========================================
+        // 2. FUTURISTIC SOUND EFFECTS (TONE.JS)
+        // ==========================================
+        let synth = null;
+        function playUiTone(type = 'ping') {
+            if (!state.sfxEnabled || typeof Tone === 'undefined') return;
+            try {
+                if (Tone.context.state !== 'running') {
+                    Tone.start();
+                }
+                if (!synth) {
+                    synth = new Tone.PolySynth(Tone.Synth, {
+                        oscillator: { type: 'sine' },
+                        envelope: { attack: 0.01, decay: 0.15, sustain: 0.05, release: 0.2 },
+                        volume: -14
+                    }).toDestination();
+                }
+                const now = Tone.now();
+                if (type === 'listen-start') {
+                    synth.triggerAttackRelease(['C5', 'G5'], '16n', now);
+                } else if (type === 'listen-stop') {
+                    synth.triggerAttackRelease(['G4', 'C4'], '16n', now);
+                } else if (type === 'reply') {
+                    synth.triggerAttackRelease(['E5', 'B5'], '32n', now);
+                } else if (type === 'send') {
+                    synth.triggerAttackRelease('A5', '32n', now);
+                }
+            } catch (e) {
+                // Ignore audio context autoplay restrictions silently
+            }
+        }
+
+        // ==========================================
+        // 3. TOAST NOTIFICATION HELPER
+        // ==========================================
+        let toastTimeout;
+        function showToast(msg) {
+            const banner = document.getElementById('toast-banner');
+            const textEl = document.getElementById('toast-message');
+            textEl.textContent = msg;
+            banner.classList.remove('translate-y-24', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                banner.classList.add('translate-y-24', 'opacity-0');
+            }, 3200);
+        }
+
+        // ==========================================
+        // 4. ANIMATED NEURAL ORB VISUALIZER (CANVAS)
+        // ==========================================
+        const canvas = document.getElementById('ai-orb-canvas');
+        const ctx = canvas.getContext('2d');
+        let phase = 0;
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        function animateOrb() {
+            const rect = canvas.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+            const cx = width / 2;
+            const cy = height / 2;
+            const baseRadius = Math.min(width, height) * 0.34;
+
+            ctx.clearRect(0, 0, width, height);
+
+            // Determine dynamic energy and colors based on AI state
+            let targetEnergy = 0.08;
+            let primaryColor = '6, 182, 212';    // Cyan
+            let secondaryColor = '236, 72, 153'; // Pink
+            let speed = 0.03;
+
+            if (state.orbState === 'listening') {
+                targetEnergy = 0.32 + Math.sin(phase * 3) * 0.12;
+                primaryColor = '236, 72, 153';   // Vibrant Pink
+                secondaryColor = '6, 182, 212';  // Cyan
+                speed = 0.075;
+            } else if (state.orbState === 'speaking') {
+                targetEnergy = 0.28 + Math.abs(Math.sin(phase * 4.5)) * 0.22;
+                primaryColor = '139, 92, 246';   // Electric Violet
+                secondaryColor = '6, 182, 212';  // Cyan
+                speed = 0.065;
+            } else if (state.orbState === 'thinking') {
+                targetEnergy = 0.18;
+                primaryColor = '245, 158, 11';   // Amber
+                secondaryColor = '236, 72, 153';
+                speed = 0.09;
+            }
+
+            state.audioEnergy += (targetEnergy - state.audioEnergy) * 0.15;
+            phase += speed;
+
+            // Core Radial Glow
+            const radialGrad = ctx.createRadialGradient(cx, cy, baseRadius * 0.1, cx, cy, baseRadius * 1.45);
+            radialGrad.addColorStop(0, `rgba(${primaryColor}, 0.55)`);
+            radialGrad.addColorStop(0.55, `rgba(${secondaryColor}, 0.22)`);
+            radialGrad.addColorStop(1, 'rgba(5, 8, 17, 0)');
+            ctx.fillStyle = radialGrad;
+            ctx.beginPath();
+            ctx.arc(cx, cy, baseRadius * 1.45, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw 3 Morphing Harmonic Wave Rings
+            for (let layer = 0; layer < 3; layer++) {
+                ctx.beginPath();
+                const points = 90;
+                const layerOffset = layer * ((Math.PI * 2) / 3);
+                const amplitude = baseRadius * state.audioEnergy * (1 - layer * 0.18);
+
+                for (let i = 0; i <= points; i++) {
+                    const angle = (i / points) * Math.PI * 2;
+                    const wave1 = Math.sin(angle * 4 + phase + layerOffset);
+                    const wave2 = Math.cos(angle * 3 - phase * 1.3);
+                    const r = baseRadius + (wave1 + wave2) * amplitude * 0.5;
+                    const x = cx + Math.cos(angle) * r;
+                    const y = cy + Math.sin(angle) * r;
+
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+
+                ctx.strokeStyle = layer === 0
+                    ? `rgba(${primaryColor}, 0.9)`
+                    : layer === 1
+                        ? `rgba(${secondaryColor}, 0.75)`
+                        : 'rgba(255, 255, 255, 0.45)';
+                ctx.lineWidth = layer === 0 ? 2.5 : 1.5;
+                ctx.stroke();
+
+                if (layer === 0) {
+                    ctx.fillStyle = `rgba(${primaryColor}, 0.14)`;
+                    ctx.fill();
+                }
+            }
+
+            requestAnimationFrame(animateOrb);
+        }
+
+        function setOrbState(newState) {
+            state.orbState = newState;
+            orbTriggerBtn.classList.remove('orb-glow-idle', 'orb-glow-listening', 'orb-glow-speaking');
+
+            if (newState === 'listening') {
+                orbTriggerBtn.classList.add('orb-glow-listening');
+                coreModeLabel.textContent = 'LISTENING...';
+                coreModeLabel.className = 'text-pink-400 font-bold';
+                headerStatusText.textContent = 'MICROPHONE ACTIVE • LISTENING';
+                statusDot.className = 'w-1.5 h-1.5 rounded-full bg-pink-500 animate-ping';
+                micInputBtn.classList.add('bg-pink-500/20', 'border-pink-500', 'text-pink-400', 'animate-pulse');
+            } else if (newState === 'speaking') {
+                orbTriggerBtn.classList.add('orb-glow-speaking');
+                coreModeLabel.textContent = 'SPEAKING';
+                coreModeLabel.className = 'text-violet-400 font-bold';
+                headerStatusText.textContent = 'VOICE SYNTHESIS ACTIVE';
+                statusDot.className = 'w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse';
+                micInputBtn.classList.remove('bg-pink-500/20', 'border-pink-500', 'text-pink-400', 'animate-pulse');
+            } else {
+                orbTriggerBtn.classList.add('orb-glow-idle');
+                coreModeLabel.textContent = 'STANDBY';
+                coreModeLabel.className = 'text-slate-200 font-bold';
+                headerStatusText.textContent = 'ONLINE • READY FOR COMMANDS';
+                statusDot.className = 'w-1.5 h-1.5 rounded-full bg-cyan-400';
+                micInputBtn.classList.remove('bg-pink-500/20', 'border-pink-500', 'text-pink-400', 'animate-pulse');
+            }
+        }
+
+        // ==========================================
+        // 5. TEXT-TO-SPEECH (SPEECH SYNTHESIS)
+        // ==========================================
+        let preferredVoice = null;
+        function loadVoices() {
+            if (!('speechSynthesis' in window)) return;
+            const voices = window.speechSynthesis.getVoices();
+            // Pick a pleasant female/assistant English voice if available
+            preferredVoice = voices.find(v =>
+                (v.name.includes('Google') || v.name.includes('Samantha') || v.name.includes('Zira') || v.name.includes('Female')) &&
+                v.lang.startsWith('en')
+            ) || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+            loadVoices();
+        }
+
+        function speakText(text) {
+            if (!state.ttsEnabled || !('speechSynthesis' in window)) return;
+
+            // Strip emojis and markdown symbols for clean speech
+            const cleanText = text
+                .replace(/[\u{1F600}-\u{1F6FF}\u{1F300}-\u{1F5FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '')
+                .replace(/[*_`#]/g, '')
+                .trim();
+
+            if (!cleanText) return;
+
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            if (preferredVoice) utterance.voice = preferredVoice;
+            utterance.rate = 1.03;
+            utterance.pitch = 1.12;
+
+            utterance.onstart = () => {
+                state.isSpeaking = true;
+                setOrbState('speaking');
+                stopSpeakingBtn.classList.remove('hidden');
+                stopSpeakingBtn.classList.add('flex');
+            };
+
+            utterance.onend = () => {
+                state.isSpeaking = false;
+                if (!state.isListening) setOrbState('idle');
+                stopSpeakingBtn.classList.add('hidden');
+                stopSpeakingBtn.classList.remove('flex');
+            };
+
+            utterance.onerror = () => {
+                state.isSpeaking = false;
+                if (!state.isListening) setOrbState('idle');
+                stopSpeakingBtn.classList.add('hidden');
+                stopSpeakingBtn.classList.remove('flex');
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopSpeaking() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            state.isSpeaking = false;
+            stopSpeakingBtn.classList.add('hidden');
+            stopSpeakingBtn.classList.remove('flex');
+            if (!state.isListening) setOrbState('idle');
+        }
+
+        // ==========================================
+        // 6. SPEECH RECOGNITION (WEB SPEECH API)
+        // ==========================================
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition = null;
+
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-IN';
+
+            recognition.onstart = () => {
+                state.isListening = true;
+                stopSpeaking();
+                setOrbState('listening');
+                playUiTone('listen-start');
+                liveTranscriptText.textContent = 'Listening... Speak now';
+                liveTranscriptText.classList.add('text-pink-300');
+            };
+
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                let finalTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+
+                if (interimTranscript) {
+                    liveTranscriptText.textContent = `"${interimTranscript}"`;
+                }
+
+                if (finalTranscript) {
+                    liveTranscriptText.textContent = `"${finalTranscript}"`;
+                    handleUserCommand(finalTranscript.trim());
+                }
+            };
+
+            recognition.onerror = (event) => {
+                state.isListening = false;
+                setOrbState('idle');
+                liveTranscriptText.classList.remove('text-pink-300');
+                if (event.error === 'not-allowed') {
+                    liveTranscriptText.textContent = 'Microphone access denied. Check browser permissions.';
+                    showToast('Microphone permission blocked. You can still type commands!');
+                } else if (event.error === 'no-speech') {
+                    liveTranscriptText.textContent = 'No speech detected. Tap the orb to try again.';
+                } else {
+                    liveTranscriptText.textContent = `Voice error (${event.error}). Try typing below.`;
+                }
+            };
+
+            recognition.onend = () => {
+                state.isListening = false;
+                liveTranscriptText.classList.remove('text-pink-300');
+                if (!state.isSpeaking) {
+                    setOrbState('idle');
+                }
+            };
+        }
+
+        function toggleVoiceListening() {
+            if (!recognition) {
+                showToast('Speech Recognition is not supported in this browser. Use Chrome/Edge or type below!');
+                userInput.focus();
+                return;
+            }
+            if (state.isListening) {
+                recognition.stop();
+                playUiTone('listen-stop');
+            } else {
+                try {
+                    recognition.start();
+                } catch (e) {
+                    recognition.stop();
+                }
+            }
+        }
+
+        // ==========================================
+        // 7. CHAT UI RENDERING
+        // ==========================================
+        function getCurrentTimeShort() {
+            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function appendMessage(sender, text, actionLink = null) {
+            const wrapper = document.createElement('div');
+            const isUser = sender === 'user';
+            wrapper.className = `flex flex-col ${isUser ? 'items-end' : 'items-start'} animate-fade-in`;
+
+            const bubble = document.createElement('div');
+            bubble.className = isUser
+                ? 'max-w-[85%] sm:max-w-[78%] rounded-2xl rounded-tr-sm px-4 py-3 bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-cyan-400/40 text-slate-100 text-sm shadow-md'
+                : 'max-w-[88%] sm:max-w-[82%] rounded-2xl rounded-tl-sm px-4 py-3 bg-slate-900/90 border border-pink-500/25 text-slate-200 text-sm shadow-md';
+
+            // Header tag inside AI message
+            if (!isUser) {
+                const header = document.createElement('div');
+                header.className = 'flex items-center gap-1.5 mb-1 text-[10px] font-mono text-pink-400 uppercase tracking-wider';
+                header.innerHTML = `<i data-lucide="sparkles" class="w-3 h-3"></i> Cutie AI`;
+                bubble.appendChild(header);
+            }
+
+            const content = document.createElement('div');
+            content.className = 'leading-relaxed whitespace-pre-line';
+            content.textContent = text;
+            bubble.appendChild(content);
+
+            // Optional interactive link button (e.g. when opening YouTube/Google)
+            if (actionLink) {
+                const linkBtn = document.createElement('a');
+                linkBtn.href = actionLink.url;
+                linkBtn.target = '_blank';
+                linkBtn.rel = 'noopener noreferrer';
+                linkBtn.className = 'mt-2.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-xs font-medium text-cyan-300 transition';
+                linkBtn.innerHTML = `<span>${actionLink.label}</span> <i data-lucide="external-link" class="w-3.5 h-3.5"></i>`;
+                bubble.appendChild(linkBtn);
+            }
+
+            const meta = document.createElement('span');
+            meta.className = 'text-[10px] font-mono text-slate-500 mt-1 px-1';
+            meta.textContent = `${isUser ? 'You' : 'Cutie'} • ${getCurrentTimeShort()}`;
+
+            wrapper.appendChild(bubble);
+            wrapper.appendChild(meta);
+            chatMessages.appendChild(wrapper);
+
+            lucide.createIcons();
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const id = 'typing-indicator';
+            if (document.getElementById(id)) return;
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = 'flex items-start';
+            div.innerHTML = `
+                <div class="rounded-2xl rounded-tl-sm px-4 py-3 bg-slate-900/80 border border-slate-800 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style="animation-delay: 0ms"></span>
+                    <span class="w-2 h-2 rounded-full bg-pink-400 animate-bounce" style="animation-delay: 150ms"></span>
+                    <span class="w-2 h-2 rounded-full bg-violet-400 animate-bounce" style="animation-delay: 300ms"></span>
+                </div>
+            `;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const el = document.getElementById('typing-indicator');
+            if (el) el.remove();
+        }
+
+        // ==========================================
+        // 8. CUTIE SMART AI INTELLIGENT BRAIN
+        // ==========================================
+        const jokesList = [
+            "Why do programmers prefer dark mode? Because light attracts bugs! 🐛✨",
+            "I told my computer I needed a break, and now it won't stop sending me Kit-Kat ads! 🍫😄",
+            "Why was the AI cold? Because it left its Windows open! ❄️💻",
+            "Parallel lines have so much in common... it’s a shame they’ll never meet! 📐😂",
+            "Why did the neural network go to therapy? It had too many deep issues! 🧠✨"
+        ];
+
+        function safeMathEvaluate(expr) {
+            // Allow only digits, spaces, and basic arithmetic operators
+            const sanitized = expr.replace(/[^0-9+\-*/().%\s]/g, '').trim();
+            if (!sanitized || !/[0-9]/.test(sanitized) || !/[+\-*/%]/.test(sanitized)) return null;
+            try {
+                const result = Function(`"use strict"; return (${sanitized})`)();
+                if (typeof result === 'number' && isFinite(result)) {
+                    return Number.isInteger(result) ? result : Number(result.toFixed(4));
+                }
+            } catch (e) {
+                return null;
+            }
+            return null;
+        }
+
+        function generateSmartResponse(rawInput) {
+            const input = rawInput.trim();
+            const lower = input.toLowerCase();
+
+            // 1. Clear Chat Command
+            if (lower === 'clear' || lower === 'clear chat' || lower.includes('clear history')) {
+                setTimeout(() => {
+                    chatMessages.innerHTML = '';
+                    appendMessage('ai', "Memory buffer cleared! ✨ How can I assist you next?");
+                }, 250);
+                return { text: "Clearing neural chat stream...", silent: false };
+            }
+
+            // 2. Greetings (English & Hindi/Hinglish)
+            if (/^(hi|hello|hey|namaste|hii|yo|good morning|good afternoon|good evening|kaise ho|kya haal)\b/.test(lower)) {
+                const hour = new Date().getHours();
+                const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+                return {
+                    text: `${greeting}! ✨ I'm Cutie Smart AI, your personal neural assistant. Everything is running smoothly. How can I help you today?`
+                };
+            }
+
+            // 3. Identity / Creator
+            if (lower.includes('who are you') || lower.includes('your name') || lower.includes('tum kaun ho') || lower.includes('who made you')) {
+                return {
+                    text: "I am Cutie Smart AI — a futuristic personal voice and chat assistant inspired by J.A.R.V.I.S., crafted to help you with quick commands, web searches, system diagnostics, and smart conversations! 💫"
+                };
+            }
+
+            // 4. Time Check
+            if (lower.includes('time') || lower.includes('samay') || lower.includes('kitne baje')) {
+                const now = new Date();
+                const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                return {
+                    text: `🕒 The current local time is ${timeStr}.`
+                };
+            }
+
+            // 5. Date Check
+            if (lower.includes('date') || lower.includes('today') || lower.includes('day') || lower.includes('tareekh')) {
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                return {
+                    text: `📅 Today is ${dateStr}.`
+                };
+            }
+
+            // 6. Weather Info (Simulated Smart Telemetry)
+            if (lower.includes('weather') || lower.includes('temperature') || lower.includes('mausam')) {
+                const cityMatch = lower.match(/weather (?:in|for|at) ([a-zA-Z\s]+)/);
+                const city = cityMatch ? cityMatch[1].trim().replace(/\b\w/g, c => c.toUpperCase()) : 'Pune, India';
+                const temps = [24, 26, 27, 29, 23];
+                const temp = temps[new Date().getHours() % temps.length];
+                return {
+                    text: `🌦️ Weather Telemetry for ${city}:\n• Temperature: ${temp}°C (Feels like ${temp + 1}°C)\n• Condition: Clear Sky with Light Breeze\n• Humidity: 48% • Air Quality: Good`,
+                    action: {
+                        label: `Live Forecast for ${city}`,
+                        url: `https://www.google.com/search?q=weather+${encodeURIComponent(city)}`
+                    }
+                };
+            }
+
+            // 7. Open Websites (YouTube, Google, GitHub, ChatGPT, Instagram, Spotify)
+            if (lower.includes('open youtube') || lower === 'youtube') {
+                window.open('https://www.youtube.com', '_blank', 'noopener,noreferrer');
+                return {
+                    text: "🚀 Launching YouTube in a new tab for you!",
+                    action: { label: 'Open YouTube', url: 'https://www.youtube.com' }
+                };
+            }
+            if (lower.includes('open google') || lower === 'google') {
+                window.open('https://www.google.com', '_blank', 'noopener,noreferrer');
+                return {
+                    text: "🌐 Opening Google Search right away!",
+                    action: { label: 'Open Google', url: 'https://www.google.com' }
+                };
+            }
+            if (lower.includes('open github') || lower === 'github') {
+                window.open('https://github.com/krushnpatils-create/Cutie-Smart-Ai', '_blank', 'noopener,noreferrer');
+                return {
+                    text: "💻 Opening the Cutie Smart AI GitHub repository!",
+                    action: { label: 'View GitHub Repo', url: 'https://github.com/krushnpatils-create/Cutie-Smart-Ai' }
+                };
+            }
+
+            // 8. Web Search Queries ("search ...", "google ...", "play ...")
+            if (lower.startsWith('search ') || lower.startsWith('google ') || lower.startsWith('find ')) {
+                const query = input.replace(/^(search|google|find)\s+/i, '').trim();
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                window.open(searchUrl, '_blank', 'noopener,noreferrer');
+                return {
+                    text: `🔍 Searching Google for "${query}"...`,
+                    action: { label: `Results for "${query}"`, url: searchUrl }
+                };
+            }
+
+            if (lower.startsWith('play ') || lower.includes('on youtube')) {
+                const query = input.replace(/^play\s+/i, '').replace(/on youtube/i, '').trim();
+                const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+                window.open(ytUrl, '_blank', 'noopener,noreferrer');
+                return {
+                    text: `🎵 Searching YouTube for "${query}"...`,
+                    action: { label: `Watch "${query}"`, url: ytUrl }
+                };
+            }
+
+            // 9. Tell a Joke
+            if (lower.includes('joke') || lower.includes('funny') || lower.includes('laugh') || lower.includes('hasao')) {
+                const randomJoke = jokesList[Math.floor(Math.random() * jokesList.length)];
+                return { text: randomJoke };
+            }
+
+            // 10. System Diagnostics Info
+            if (lower.includes('system') || lower.includes('battery') || lower.includes('device') || lower.includes('status')) {
+                const cores = navigator.hardwareConcurrency || 4;
+                const platform = navigator.platform || 'Web Neural OS';
+                const online = navigator.onLine ? 'Connected (High Speed)' : 'Offline';
+                return {
+                    text: `⚡ System Diagnostics Report:\n• Platform: ${platform}\n• Logical Cores: ${cores} Threads\n• Battery Level: ${state.batteryLevel} (${state.batteryCharging ? 'Charging/AC' : 'Discharging'})\n• Network Uplink: ${online}\n• Voice Engine: ${SpeechRecognition ? 'Active' : 'Text Fallback'}`
+                };
+            }
+
+            // 11. Math Calculator
+            const mathCandidate = lower.replace(/calculate|what is|solve|equals/g, '').trim();
+            const mathResult = safeMathEvaluate(mathCandidate);
+            if (mathResult !== null) {
+                return {
+                    text: `🧮 Calculation Result:\n${mathCandidate} = ${mathResult}`
+                };
+            }
+
+            // 12. Polite / Gratitude
+            if (lower.includes('thank') || lower.includes('shukriya') || lower.includes('awesome') || lower.includes('smart')) {
+                return {
+                    text: "You're most welcome! 😊 Always happy to assist. Let me know if you need anything else!"
+                };
+            }
+
+            // 13. Fallback Smart Conversational Reply with Quick Search Option
+            return {
+                text: `I heard: "${input}". While I'm running in local browser mode, I can instantly search the web for this or execute commands like checking time, weather, math, or opening YouTube/Google!`,
+                action: {
+                    label: `Search Web for "${input.slice(0, 24)}${input.length > 24 ? '...' : ''}"`,
+                    url: `https://www.google.com/search?q=${encodeURIComponent(input)}`
+                }
+            };
+        }
+
+        function handleUserCommand(text) {
+            if (!text) return;
+
+            appendMessage('user', text);
+            playUiTone('send');
+            userInput.value = '';
+            setOrbState('thinking');
+            showTypingIndicator();
+
+            // Simulate natural neural processing delay
+            setTimeout(() => {
+                removeTypingIndicator();
+                const response = generateSmartResponse(text);
+                appendMessage('ai', response.text, response.action || null);
+                playUiTone('reply');
+
+                if (state.ttsEnabled && !response.silent) {
+                    speakText(response.text);
+                } else {
+                    setOrbState('idle');
+                }
+            }, 420);
+        }
+
+        // ==========================================
+        // 9. EVENT LISTENERS & INITIALIZATION
+        // ==========================================
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = userInput.value.trim();
+            if (text) {
+                handleUserCommand(text);
+            }
+        });
+
+        orbTriggerBtn.addEventListener('click', toggleVoiceListening);
+        micInputBtn.addEventListener('click', toggleVoiceListening);
+        stopSpeakingBtn.addEventListener('click', stopSpeaking);
+
+        // Quick Action Chips
+        document.querySelectorAll('.quick-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const cmd = chip.getAttribute('data-cmd');
+                if (cmd) {
+                    liveTranscriptText.textContent = `Command: "${cmd}"`;
+                    handleUserCommand(cmd);
+                }
+            });
+        });
+
+        // Clear chat top button
+        clearChatTopBtn.addEventListener('click', () => {
+            chatMessages.innerHTML = '';
+            appendMessage('ai', "Chat stream cleared! ✨ Ready for your next command.");
+            playUiTone('listen-stop');
+        });
+
+        // Toggle TTS Voice Output
+        ttsToggleBtn.addEventListener('click', () => {
+            state.ttsEnabled = !state.ttsEnabled;
+            if (state.ttsEnabled) {
+                ttsIcon.setAttribute('data-lucide', 'volume-2');
+                ttsLabel.textContent = 'Voice: ON';
+                ttsToggleBtn.classList.add('text-cyan-300', 'border-cyan-500/30');
+                ttsToggleBtn.classList.remove('text-slate-400', 'border-slate-700');
+                showToast('Voice synthesis enabled');
+            } else {
+                stopSpeaking();
+                ttsIcon.setAttribute('data-lucide', 'volume-x');
+                ttsLabel.textContent = 'Voice: OFF';
+                ttsToggleBtn.classList.remove('text-cyan-300', 'border-cyan-500/30');
+                ttsToggleBtn.classList.add('text-slate-400', 'border-slate-700');
+                showToast('Voice synthesis muted');
+            }
+            lucide.createIcons();
+        });
+
+        // Toggle UI SFX
+        sfxToggleBtn.addEventListener('click', () => {
+            state.sfxEnabled = !state.sfxEnabled;
+            sfxIcon.setAttribute('data-lucide', state.sfxEnabled ? 'bell-ring' : 'bell-off');
+            sfxToggleBtn.classList.toggle('text-slate-500', !state.sfxEnabled);
+            lucide.createIcons();
+            showToast(state.sfxEnabled ? 'UI sound effects ON' : 'UI sound effects OFF');
+        });
+
+        // Help Modal Controls
+        helpBtn.addEventListener('click', () => {
+            helpModal.classList.remove('hidden');
+            helpModal.classList.add('flex');
+        });
+        closeHelpBtn.addEventListener('click', () => {
+            helpModal.classList.add('hidden');
+            helpModal.classList.remove('flex');
+        });
+        helpModal.addEventListener('click', (e) => {
+            if (e.target === helpModal) {
+                helpModal.classList.add('hidden');
+                helpModal.classList.remove('flex');
+            }
+        });
+
+        // Live HUD Clock & Battery Telemetry Updater
+        function updateTelemetry() {
+            const now = new Date();
+            document.getElementById('hud-time').textContent = now.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('hud-date').textContent = now.toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            }).toUpperCase();
+
+            document.getElementById('sys-network').textContent = navigator.onLine ? 'ONLINE' : 'OFFLINE';
+        }
+
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(battery => {
+                const updateBat = () => {
+                    const pct = `${Math.round(battery.level * 100)}%`;
+                    state.batteryLevel = pct;
+                    state.batteryCharging = battery.charging;
+                    document.getElementById('sys-battery').textContent = pct;
+                };
+                updateBat();
+                battery.addEventListener('levelchange', updateBat);
+                battery.addEventListener('chargingchange', updateBat);
+            });
+        }
+
+        // Boot Sequence on Window Load
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            animateOrb();
+            updateTelemetry();
+            setInterval(updateTelemetry, 1000);
+
+            // Initial Welcome Message
+            setTimeout(() => {
+                appendMessage(
+                    'ai',
+                    "Hello! I'm Cutie Smart AI ✨ Your personal voice & chat assistant is online.\nTap the glowing orb to speak a command, pick a quick action chip below, or type anything to begin!"
+                );
+            }, 300);
+        });
+    </script>
+</body>
+</html>
