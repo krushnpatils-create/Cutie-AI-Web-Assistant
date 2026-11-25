@@ -91,7 +91,7 @@
                         CUTIE SMART AI
                     </h1>
                     <span class="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
-                        v2.5 NEURAL CORE
+                        v2.6 NEURAL CORE
                     </span>
                 </div>
                 <p class="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
@@ -165,7 +165,7 @@
                         <span id="live-transcript-text" class="truncate">Tap the orb or mic below to speak...</span>
                     </div>
                     <p class="text-[11px] text-slate-400">
-                        Try: <span class="text-cyan-300">"What time is it?"</span>, <span class="text-pink-300">"Open YouTube"</span>, or <span class="text-violet-300">"Joke sang"</span>
+                        Try: <span class="text-cyan-300">"What is AI?"</span>, <span class="text-pink-300">"Open Cloud"</span>, or <span class="text-violet-300">"Joke sang"</span>
                     </p>
                 </div>
             </div>
@@ -217,6 +217,12 @@
             <div class="px-4 py-2.5 bg-slate-950/50 border-t border-slate-800/70">
                 <div class="flex items-center gap-2 overflow-x-auto pb-1">
                     <span class="text-[10px] font-mono text-slate-500 uppercase shrink-0">Quick:</span>
+                    <button data-cmd="What is artificial intelligence" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
+                        <i data-lucide="brain" class="w-3 h-3 text-cyan-400"></i> What is AI?
+                    </button>
+                    <button data-cmd="Open Cloud" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
+                        <i data-lucide="cloud" class="w-3 h-3 text-sky-400"></i> Open Cloud
+                    </button>
                     <button data-cmd="What time is it?" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
                         <i data-lucide="clock" class="w-3 h-3 text-cyan-400"></i> Check Time
                     </button>
@@ -224,22 +230,19 @@
                         <i data-lucide="calendar" class="w-3 h-3 text-pink-400"></i> Date
                     </button>
                     <button data-cmd="Check weather info" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
-                        <i data-lucide="cloud-sun" class="w-3 h-3 text-amber-400"></i> Weather Info
+                        <i data-lucide="cloud-sun" class="w-3 h-3 text-amber-400"></i> Weather
                     </button>
                     <button data-cmd="Open YouTube" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
-                        <i data-lucide="youtube" class="w-3 h-3 text-rose-500"></i> Open YouTube
-                    </button>
-                    <button data-cmd="Open Google" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
-                        <i data-lucide="search" class="w-3 h-3 text-blue-400"></i> Open Google
+                        <i data-lucide="youtube" class="w-3 h-3 text-rose-500"></i> YouTube
                     </button>
                     <button data-cmd="Tell me a joke" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
-                        <i data-lucide="smile" class="w-3 h-3 text-emerald-400"></i> Tell a Joke
+                        <i data-lucide="smile" class="w-3 h-3 text-emerald-400"></i> Joke
                     </button>
                     <button data-cmd="System info" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 text-xs text-slate-200 hover:text-cyan-300 transition flex items-center gap-1.5">
                         <i data-lucide="cpu" class="w-3 h-3 text-violet-400"></i> System Info
                     </button>
                     <button data-cmd="Clear chat" class="quick-chip shrink-0 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-rose-950/60 border border-slate-700/80 hover:border-rose-500/50 text-xs text-slate-200 hover:text-rose-300 transition flex items-center gap-1.5">
-                        <i data-lucide="eraser" class="w-3 h-3 text-rose-400"></i> Clear Chat
+                        <i data-lucide="eraser" class="w-3 h-3 text-rose-400"></i> Clear
                     </button>
                 </div>
             </div>
@@ -253,7 +256,7 @@
 
                 <div class="relative flex-1">
                     <input type="text" id="user-input" autocomplete="off"
-                        placeholder="Ask Cutie anything or type a command (e.g., 'Search Pune news')..."
+                        placeholder="Ask anything (e.g., 'What is AI?', 'Open Cloud', 'Calculate 25*16')..."
                         class="w-full bg-slate-950/90 border border-slate-700/90 focus:border-cyan-400 rounded-2xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all">
                 </div>
 
@@ -290,16 +293,16 @@
                 <p class="text-slate-400">Speak or type commands in English, Marathi, or Hindi:</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
                     <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                        <span class="text-cyan-400 font-semibold block mb-1">🕒 Time & Date</span>
-                        "What time is it?" / "Time kay zala"<br>"Today's date" / "Aajchi tarikh"
+                        <span class="text-cyan-400 font-semibold block mb-1">🧠 Instant Knowledge</span>
+                        "What is AI?"<br>"Who is Elon Musk?"
                     </div>
                     <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                        <span class="text-pink-400 font-semibold block mb-1">🌐 Web & Search</span>
-                        "Open YouTube / Google / WhatsApp"<br>"Search [anything]"
+                        <span class="text-pink-400 font-semibold block mb-1">☁️ Cloud & Apps</span>
+                        "Open Cloud / Drive / iCloud"<br>"Open YouTube / WhatsApp"
                     </div>
                     <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                        <span class="text-amber-400 font-semibold block mb-1">🌦️ Weather</span>
-                        "Check weather info"<br>"Weather in Pune / Mumbai"
+                        <span class="text-amber-400 font-semibold block mb-1">🕒 Time, Date & Weather</span>
+                        "Time kay zala?"<br>"Weather in Pune"
                     </div>
                     <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
                         <span class="text-emerald-400 font-semibold block mb-1">😄 Fun & Math</span>
@@ -660,35 +663,74 @@
             "There are 10 types of people in the world: those who understand binary, and those who don't."
         ];
 
-        function generateResponse(rawInput) {
+        // Instant Knowledge Lookup via Wikipedia REST API
+        async function fetchInstantAnswer(topic) {
+            try {
+                let cleanTopic = topic
+                    .replace(/^(what is|what are|who is|who was|tell me about|define|explain)\s+(a|an|the)?\s*/i, '')
+                    .replace(/[?.,!]/g, '')
+                    .trim();
+
+                if (!cleanTopic) return null;
+
+                // Map common short acronyms to full Wikipedia titles
+                const aliasMap = {
+                    'ai': 'Artificial intelligence',
+                    'ml': 'Machine learning',
+                    'iot': 'Internet of things',
+                    'cpu': 'Central processing unit',
+                    'gpu': 'Graphics processing unit',
+                    'html': 'HTML',
+                    'css': 'CSS',
+                    'js': 'JavaScript'
+                };
+                if (aliasMap[cleanTopic.toLowerCase()]) {
+                    cleanTopic = aliasMap[cleanTopic.toLowerCase()];
+                }
+
+                const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cleanTopic)}`);
+                if (!res.ok) return null;
+
+                const data = await res.json();
+                if (data.extract) {
+                    const shortSummary = data.extract.split('. ').slice(0, 2).join('. ') + '.';
+                    return `<strong>${escapeHtml(data.title)}:</strong> ${escapeHtml(shortSummary)}`;
+                }
+            } catch (err) {
+                return null;
+            }
+            return null;
+        }
+
+        async function generateResponse(rawInput) {
             const cmd = rawInput.toLowerCase().trim();
 
-            // Clear chat
+            // 1. Clear chat
             if (cmd === 'clear chat' || cmd === 'clear' || cmd === 'reset chat' || cmd.includes('chat saaf')) {
                 chatMessages.innerHTML = '';
                 return "Neural command stream cleared! Ready for your next instruction, Krishna.";
             }
 
-            // Greetings
+            // 2. Greetings
             if (/^(hi|hello|hey|namaste|namaskar|hola|good morning|good afternoon|good evening)\b/.test(cmd)) {
                 const hour = new Date().getHours();
                 const greet = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
-                return `${greet}, Krishna! Cutie Smart AI is online and ready. How can I assist you today?`;
+                return `${greet}, Krishna! Cutie Smart AI is online and ready. Ask me anything!`;
             }
 
-            // Time (English + Marathi/Hindi)
+            // 3. Time
             if (cmd.includes('time') || cmd.includes('vel') || cmd.includes('kya baja')) {
                 const now = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
                 return `The current time is <strong class="text-cyan-300">${now}</strong>.`;
             }
 
-            // Date (English + Marathi/Hindi)
+            // 4. Date
             if (cmd.includes('date') || cmd.includes('today') || cmd.includes('tarikh')) {
                 const today = new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
                 return `Today is <strong class="text-pink-300">${today}</strong>.`;
             }
 
-            // Open Websites (English + Marathi/Hindi)
+            // 5. Open Websites & Cloud Services
             if (cmd.startsWith('open ') || cmd.endsWith(' ughad') || cmd.endsWith(' khol')) {
                 const site = cmd.replace(/^open\s+|\s+ughad$|\s+khol$/g, '').trim();
                 const siteMap = {
@@ -699,34 +741,38 @@
                     'whatsapp': 'https://web.whatsapp.com',
                     'instagram': 'https://www.instagram.com',
                     'chatgpt': 'https://chatgpt.com',
-                    'maps': 'https://maps.google.com'
+                    'maps': 'https://maps.google.com',
+                    'cloud': 'https://drive.google.com',
+                    'google cloud': 'https://console.cloud.google.com',
+                    'icloud': 'https://www.icloud.com',
+                    'drive': 'https://drive.google.com'
                 };
-                const url = siteMap[site] || `https://www.google.com/search?q=${encodeURIComponent(site)}`;
+                const url = siteMap[site] || `https://${site.replace(/\s+/g, '')}.com`;
                 window.open(url, '_blank', 'noopener,noreferrer');
                 return `Launching <strong class="text-cyan-300">${escapeHtml(site.toUpperCase())}</strong> in a new neural tab...`;
             }
 
-            // Search queries
+            // 6. Search queries
             if (cmd.startsWith('search ') || cmd.startsWith('google ') || cmd.endsWith(' search kar')) {
                 const query = rawInput.replace(/^(search|google)\s+|\s+search kar$/gi, '').trim();
                 window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank', 'noopener,noreferrer');
                 return `Searching Google for <strong class="text-cyan-300">"${escapeHtml(query)}"</strong>...`;
             }
 
-            // Weather info
+            // 7. Weather
             if (cmd.includes('weather') || cmd.includes('havaman') || cmd.includes('mausam')) {
                 const cityMatch = cmd.match(/weather in ([a-z\s]+)/i);
                 const city = cityMatch ? cityMatch[1].trim() : 'Pune';
                 window.open(`https://www.google.com/search?q=weather+in+${encodeURIComponent(city)}`, '_blank', 'noopener,noreferrer');
-                return `Opening live meteorological telemetry for <strong class="text-amber-300">${escapeHtml(city.toUpperCase())}</strong>.`;
+                return `Opening live weather forecast for <strong class="text-amber-300">${escapeHtml(city.toUpperCase())}</strong>.`;
             }
 
-            // Joke
+            // 8. Joke
             if (cmd.includes('joke') || cmd.includes('funny') || cmd.includes('vinod')) {
                 return jokes[Math.floor(Math.random() * jokes.length)];
             }
 
-            // Math calculation
+            // 9. Math calculation
             if (cmd.startsWith('calculate ') || /^[0-9+\-*/().\s]+$/.test(cmd)) {
                 const expr = cmd.replace('calculate ', '').trim();
                 try {
@@ -735,39 +781,44 @@
                         return `Calculation result: <strong class="text-emerald-400 font-mono">${escapeHtml(expr)} = ${result}</strong>`;
                     }
                 } catch (e) {
-                    return "I couldn't evaluate that expression. Try something like: <code>calculate 45 * 18</code>.";
+                    return "Invalid math expression. Try: <code>calculate 45 * 18</code>.";
                 }
             }
 
-            // System info & Battery
+            // 10. System info & Battery
             if (cmd.includes('system') || cmd.includes('battery') || cmd.includes('status')) {
                 const platform = navigator.platform || 'WebOS';
                 const cores = navigator.hardwareConcurrency || '4';
                 return `<strong>System Telemetry:</strong><br>• Platform: <span class="text-cyan-300">${platform}</span><br>• Logical Cores: <span class="text-pink-300">${cores}</span><br>• Power Status: <span class="text-emerald-400">${state.batteryLevel}</span><br>• Network: <span class="text-violet-300">${navigator.onLine ? 'Online' : 'Offline'}</span>`;
             }
 
-            // Identity
+            // 11. Identity
             if (cmd.includes('who are you') || cmd.includes('your name') || cmd.includes('tu kon')) {
-                return "I am <strong>Cutie Smart AI (v2.5 Neural Core)</strong> — your personal futuristic voice and chat assistant.";
+                return "I am <strong>Cutie Smart AI (v2.6 Neural Core)</strong> — your personal futuristic voice and chat assistant.";
             }
 
-            // Fallback: automatically offer Google search for unknown queries
-            return `I heard: <em>"${escapeHtml(rawInput)}"</em>. Try asking for the <strong>time</strong>, <strong>date</strong>, <strong>system info</strong>, <strong>a joke</strong>, or type <strong>"Search ${escapeHtml(rawInput)}"</strong> to look it up online!`;
+            // 12. General Knowledge Questions ("what is...", "who is...", or any topic)
+            const wikiAnswer = await fetchInstantAnswer(rawInput);
+            if (wikiAnswer) {
+                return wikiAnswer;
+            }
+
+            // 13. Smart fallback with clickable Google search link
+            const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(rawInput)}`;
+            return `I couldn't find an instant summary for <em>"${escapeHtml(rawInput)}"</em>. <a href="${searchUrl}" target="_blank" rel="noopener noreferrer" class="text-cyan-400 underline font-semibold">Click here to search Google</a>.`;
         }
 
-        function handleUserCommand(text) {
+        async function handleUserCommand(text) {
             if (!text.trim()) return;
             appendMessage('user', text);
             playUiTone('send');
             setOrbState('thinking');
 
-            setTimeout(() => {
-                const reply = generateResponse(text);
-                appendMessage('ai', reply);
-                playUiTone('reply');
-                if (!state.isSpeaking) setOrbState('idle');
-                speakText(reply);
-            }, 350);
+            const reply = await generateResponse(text);
+            appendMessage('ai', reply);
+            playUiTone('reply');
+            if (!state.isSpeaking) setOrbState('idle');
+            speakText(reply);
         }
 
         // Live HUD Clock & Battery Telemetry
@@ -852,7 +903,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             resizeCanvas();
             animateOrb();
-            appendMessage('ai', "Welcome back, <strong>Krishna</strong>! Cutie Smart AI Neural Core v2.5 is online. Tap the glowing orb or type a command below to get started.");
+            appendMessage('ai', "Welcome back, <strong>Krishna</strong>! Cutie Smart AI Neural Core v2.6 is online. Ask me any question like <em>\"What is AI?\"</em> or tap a quick command below.");
         });
     </script>
 </body>
